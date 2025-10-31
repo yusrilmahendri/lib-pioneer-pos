@@ -14,7 +14,6 @@
               [data]="mainChart.data"
               [height]="300"
               [ngStyle]="{ 'marginTop.px': 40 }"
-              [options]="mainChart.options"
               [type]="mainChart.type"
               (chartRef)="handleChartRef($event)"
               >
@@ -51,7 +50,6 @@
                         <c-chart
                           [data]="yearlyChart.data"
                           [height]="300"
-                          [options]="yearlyChart.options"
                           [type]="yearlyChart.type"
                           (chartRef)="handleChartRef($event)"
                           >
