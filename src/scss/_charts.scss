@@ -1,5 +1,7 @@
-// custom .chartjs-tooltip-body-item
-
+// custom 
+.chartjs-tooltip-body-item > span {
+  font-weight: bold !important;
+}
 .chartjs-tooltip-body-item > td {
   padding-bottom: 0 !important;
   padding-top: 0 !important;
