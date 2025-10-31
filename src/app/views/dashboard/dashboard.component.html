@@ -22,10 +22,45 @@
               </c-chart>
           </c-card-body>
         </c-card>
-
         
+      <c-row class="mb-4">
+        <c-col xs="12" md="6" lg="6">
+              <c-card>
+                <c-card-header>
+                  <h4 class="card-title mb-0">Transaksi Per Bulan</h4>
+                </c-card-header>
+                <c-card-body>
+                  <c-chart
+                    [data]="pieChart.data"
+                    [height]="300"
+                    [options]="pieChart.options"
+                    [type]="pieChart.type"
+                    [plugins]="pieChartPlugins"
+                  >
+                  </c-chart>
+                </c-card-body>
+              </c-card>
+            </c-col>
+                 
+            <c-col xs="12" md="6" lg="6">
+                <c-card>
+                    <c-card-header>
+                        <h4 class="card-title mb-0">Tren Pendapatan Tahunan</h4>
+                    </c-card-header>
+                    <c-card-body>
+                        <c-chart
+                          [data]="yearlyChart.data"
+                          [height]="300"
+                          [options]="yearlyChart.options"
+                          [type]="yearlyChart.type"
+                          (chartRef)="handleChartRef($event)"
+                          >
+                          Main chart
+                          </c-chart>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
 
-    
-    
     </c-card-body>
 </c-card>

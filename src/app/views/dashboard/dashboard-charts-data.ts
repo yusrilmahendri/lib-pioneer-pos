@@ -18,7 +18,8 @@ export interface IChartProps {
   providedIn: 'any'
 })
 export class DashboardChartsData {
-  constructor() {}
+  constructor() {
+  }
 
   public mainChart: IChartProps = { type: 'line' };
 
@@ -200,4 +201,86 @@ export class DashboardChartsData {
     // Tetapkan chart utama sebagai default bulanan
     this.mainChart = this.getMonthlyData();
   }
+
+  // ===============================================
+  // FUNGSI UNTUK MENGAMBIL DATA PIE CHART PEMASUKAN & PENGELUARAN
+  // ===============================================
+  getRevenueExpensePieData(): IChartProps {
+    const labels = ['Pemasukan', 'Pengeluaran'];
+    
+    // Data persentase (Contoh: 70% dan 30%)
+    const percentageRevenue = this.random(60, 80); 
+    const percentageExpense = 100 - percentageRevenue;
+    const data = [percentageRevenue, percentageExpense]; 
+
+    // Warna: Biru Tua (Primary) dan Merah/Salmon (Danger)
+    const colorRevenue = getStyle('--cui-primary') ?? '#321fdb'; 
+    const colorExpense = getStyle('--cui-danger') ?? '#f86c6b';   
+    const backgroundColors = [colorRevenue, colorExpense];
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'right', 
+                labels: {
+                    color: getStyle('--cui-body-color'),
+                    usePointStyle: true
+                }
+            },
+            tooltip: {
+                // ... (konfigurasi tooltip tetap sama, menampilkan nilai Rupiah dan Persentase di hover)
+                callbacks: {
+                    label: function(context: any) {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        const value = context.parsed;
+                        // Angka acak Rupiah untuk ditampilkan di tooltip (simulasi data)
+                        const totalRupiah = (value === percentageRevenue ? 56000000 : 24000000); 
+
+                        // Menampilkan data yang lebih detail saat hover, seperti di gambar
+                        label += 'Rp ' + totalRupiah.toLocaleString('id-ID') + ' (' + value.toFixed(0) + '%)'; 
+                        return label;
+                    }
+                }
+            },
+            // ==============================================
+            // KONFIGURASI DATALABELS (MEMBUTUHKAN PLUGIN)
+            // ==============================================
+            datalabels: { 
+                formatter: (value: number) => {
+                    // Hanya menampilkan persentase
+                    return value.toFixed(0) + '%'; 
+                },
+                color: '#fff', // Teks warna putih agar kontras
+                font: {
+                    weight: 'bold',
+                    size: 18 
+                },
+                textAlign: 'center'
+            }
+        }
+    } as ChartOptions & { plugins?: any };
+
+    const datasets: ChartDataset[] = [
+      {
+        data: data,
+        backgroundColor: backgroundColors,
+        hoverBackgroundColor: backgroundColors,
+        borderWidth: 1,
+      },
+    ];
+
+    return {
+        type: 'pie', 
+        options,
+        data: { datasets, labels }
+    };
+  }
+
+  
 }
