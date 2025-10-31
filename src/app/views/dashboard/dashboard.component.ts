@@ -1,6 +1,6 @@
 import { NgStyle } from '@angular/common';
 import { Component, DestroyRef, DOCUMENT, effect, inject, OnInit, Renderer2, signal, WritableSignal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+// Hapus import: import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChartOptions } from 'chart.js';
 import {
   AvatarComponent,
@@ -24,6 +24,7 @@ import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.co
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 
+// Jika Anda masih menggunakan tabel users di HTML, biarkan interface ini.
 interface IUser {
   name: string;
   state: string;
@@ -41,7 +42,8 @@ interface IUser {
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss'],
-  imports: [WidgetsDropdownComponent, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
+  // Hapus ReactiveFormsModule dari imports, karena sudah tidak digunakan
+  imports: [WidgetsDropdownComponent, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
 })
 export class DashboardComponent implements OnInit {
 
@@ -49,8 +51,10 @@ export class DashboardComponent implements OnInit {
   readonly #document: Document = inject(DOCUMENT);
   readonly #renderer: Renderer2 = inject(Renderer2);
   readonly #chartsData: DashboardChartsData = inject(DashboardChartsData);
-
+  
+  // Pertahankan data users jika Anda masih ingin menampilkannya di template
   public users: IUser[] = [
+    // ... data users tetap dipertahankan
     {
       name: 'Yiorgos Avraamu',
       state: 'New',
@@ -64,6 +68,7 @@ export class DashboardComponent implements OnInit {
       status: 'success',
       color: 'success'
     },
+    // ... data lainnya
     {
       name: 'Avram Tarasios',
       state: 'Recurring ',
@@ -130,6 +135,7 @@ export class DashboardComponent implements OnInit {
       color: 'dark'
     }
   ];
+  
 
   public mainChart: IChartProps = { type: 'line' };
   public mainChartRef: WritableSignal<any> = signal(undefined);
@@ -139,9 +145,8 @@ export class DashboardComponent implements OnInit {
     }
   });
   public chart: Array<IChartProps> = [];
-  public trafficRadioGroup = new FormGroup({
-    trafficRadio: new FormControl('Month')
-  });
+  
+  // DIHAPUS: public trafficRadioGroup = new FormGroup(...)
 
   ngOnInit(): void {
     this.initCharts();
@@ -150,14 +155,11 @@ export class DashboardComponent implements OnInit {
 
   initCharts(): void {
     this.mainChartRef()?.stop();
-    this.mainChart = this.#chartsData.mainChart;
+    // PERBAIKAN: Panggil getDailyData() sebagai overview utama
+    this.mainChart = this.#chartsData.getDailyData();
   }
 
-  setTrafficPeriod(value: string): void {
-    this.trafficRadioGroup.setValue({ trafficRadio: value });
-    this.#chartsData.initMainChart(value);
-    this.initCharts();
-  }
+  // DIHAPUS: setTrafficPeriod(value: string): void { ... }
 
   handleChartRef($chartRef: any) {
     if ($chartRef) {
