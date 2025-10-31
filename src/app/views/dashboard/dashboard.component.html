@@ -18,7 +18,7 @@
               [type]="mainChart.type"
               (chartRef)="handleChartRef($event)"
               >
-              Main chart
+              Main chart day
               </c-chart>
           </c-card-body>
         </c-card>
@@ -36,7 +36,7 @@
                     [options]="pieChart.options"
                     [type]="pieChart.type"
                     [plugins]="pieChartPlugins"
-                  >
+                  >pieChart
                   </c-chart>
                 </c-card-body>
               </c-card>
@@ -55,7 +55,7 @@
                           [type]="yearlyChart.type"
                           (chartRef)="handleChartRef($event)"
                           >
-                          Main chart
+                          Main chart year
                           </c-chart>
                     </c-card-body>
                 </c-card>
