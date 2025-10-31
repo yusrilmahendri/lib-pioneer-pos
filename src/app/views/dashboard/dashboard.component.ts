@@ -23,7 +23,7 @@ import { IconDirective } from '@coreui/icons-angular';
 import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
-import datalabels from 'chartjs-plugin-datalabels';
+// import datalabels from 'chartjs-plugin-datalabels';
 
 // Jika Anda masih menggunakan tabel users di HTML, biarkan interface ini.
 interface IUser {
@@ -141,7 +141,7 @@ export class DashboardComponent implements OnInit {
   public mainChart: IChartProps = { type: 'line' };
   public yearlyChart: IChartProps = { type: 'line' };
   public mainChartRef: WritableSignal<any> = signal(undefined);
-  public pieChartPlugins = [datalabels];
+  // public pieChartPlugins = [datalabels];
   
   #mainChartRefEffect = effect(() => {
     if (this.mainChartRef()) {
