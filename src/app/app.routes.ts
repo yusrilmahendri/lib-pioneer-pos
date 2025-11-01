@@ -4,6 +4,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ProductsComponentsComponent } from './products-components/products-components.component';
+import { PenjualanComponentsComponent } from './penjualan-components/penjualan-components.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,7 @@ export const routes: Routes = [
     children: [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
         { path: 'products', component: ProductsComponentsComponent, data: { title: 'Kelola Produk' } },
+        { path: 'penjualan', component: PenjualanComponentsComponent, data: { title: 'Kelola Penjualan' } },
     ]
   },
   // Rute-rute ini ditampilkan DI LUAR layout

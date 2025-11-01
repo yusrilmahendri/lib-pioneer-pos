@@ -1,12 +1,11 @@
 <c-card>
   <c-card-body>
+
+    <app-widgets/>
     <!-- Tombol atas -->
     <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
       <button class="btn btn-dark d-flex align-items-center">
          <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
-      </button>
-      <button class="btn btn-primary d-flex align-items-center">
-         <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Produk
       </button>
     </div>
 
@@ -38,40 +37,36 @@
         <thead>
           <tr>
             <th scope="col">No</th>
-            <th scope="col">Nama Produk</th>
-            <th scope="col">Kode Produk</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Harga Beli</th>
-            <th scope="col">Harga Jual</th>
-            <th scope="col">Stok</th>
-            <th scope="col">Minimal Stok</th>
+            <th scope="col">No Transaksi</th>
             <th scope="col">Tanggal Input</th>
+            <th scope="col">Kasir</th>
+            <th scope="col">Item</th>
+            <th scope="col">Total</th>
+            <th scope="col">Metode Pembayaran</th>
             <th scope="col">Status</th>
             <th scope="col">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products; let i = index">
+          <tr *ngFor="let penjualan of penjualans; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ product.namaProduk }}</td>
-            <td>{{ product.kodeProduk }}</td>
-            <td>{{ product.kategori }}</td>
-            <td>{{ formatRupiah(product.hargaBeli) }}</td>
-            <td>{{ formatRupiah(product.hargaJual) }}</td>
-            <td [ngClass]="{'text-danger': product.stok === 0}">{{ product.stok }}</td>
-            <td>{{ product.minimalStok }}</td>
-            <td>{{ product.tanggalInput }}</td>
+            <td>{{ penjualan.no_transaksi }}</td>
+            <td>{{ penjualan.tanggal_input }}</td>
+            <td>{{ penjualan.kasir }}</td>
+            <td>{{ penjualan.item }}</td>
+            <td>{{ formatRupiah(penjualan.total) }}</td>
+            <td>{{ penjualan.metode_pembayaran.join(', ') }}</td>
             <td>
-              <c-badge [color]="getStatusColor(product.status)">
-                {{ product.status }}
+              <c-badge [color]="getStatusColor(penjualan.status)">
+                {{ penjualan.status }}
               </c-badge>
             </td>
             <td>
               <button class="icon-button me-2">
-                <svg [cIcon]="icons.cilPencil" width="16" height="16" class="text-primary"></svg>
+                <svg [cIcon]="icons.cilYen" width="16" height="16" class="text-primary"></svg>
               </button>
-              <button class="icon-button">
-                <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
+              <button class="icon-button me-2">
+                <svg [cIcon]="icons.cilPrint" width="16" height="16" class="text-primary"></svg>
               </button>
             </td>
           </tr>
@@ -81,7 +76,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
       <p class="text-muted small mb-0">
-          Menampilkan 1–{{ products.length }} dari {{ products.length }} hasil
+          Menampilkan 1–{{ penjualans.length }} dari {{ penjualans.length }} hasil
       </p>
 
       <c-pagination aria-label="Page navigation example">

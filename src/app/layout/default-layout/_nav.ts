@@ -13,7 +13,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Riwayat Penjualan',
-    url: '/sales/history', // URL placeholder diperbarui
+    url: '/penjualan', // URL placeholder diperbarui
     iconComponent: { name: 'cil-history' } // Menggantikan 'cil-pencil'
   },
   {
