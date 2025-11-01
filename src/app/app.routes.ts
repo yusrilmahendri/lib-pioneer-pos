@@ -19,7 +19,7 @@ export const routes: Routes = [
     },
     children: [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
-        { path: 'products', component: ProductsComponentsComponent, data: { title: 'Products' } },
+        { path: 'products', component: ProductsComponentsComponent, data: { title: 'Kelola Produk' } },
     ]
   },
   // Rute-rute ini ditampilkan DI LUAR layout
