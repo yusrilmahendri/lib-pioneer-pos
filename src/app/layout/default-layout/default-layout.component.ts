@@ -1,8 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 import { IconDirective } from '@coreui/icons-angular';
+import { IconSetService } from '@coreui/icons-angular';
+import { 
+  cilSpeedometer, 
+  cilHistory, 
+  cilWallet, 
+  cilLayers,
+  cilTags,
+  // Ikon Header (Baru)
+  cilMenu,
+  cilUser,
+  cilSettings,
+  cilAccountLogout,
+  cilSun,
+  cilMoon,
+  cilContrast
+} from '@coreui/icons';
+
 import {
   ContainerComponent,
   ShadowOnScrollDirective,
@@ -12,7 +29,7 @@ import {
   SidebarHeaderComponent,
   SidebarNavComponent,
   SidebarToggleDirective,
-  SidebarTogglerDirective
+  SidebarTogglerDirective,
 } from '@coreui/angular';
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
@@ -49,4 +66,23 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
+    public iconSetService = inject(IconSetService);
+  constructor() {
+    // Daftarkan semua ikon yang Anda gunakan di _nav.ts
+    this.iconSetService.icons = {
+      cilSpeedometer,
+      cilHistory,
+      cilWallet,
+      cilLayers,
+      cilTags,
+      // Header
+      cilMenu,
+      cilUser,
+      cilSettings,
+      cilAccountLogout,
+      cilSun,
+      cilMoon,
+      cilContrast
+    };
+  }
 }

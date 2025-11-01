@@ -2,14 +2,14 @@
 <c-sidebar
   #sidebar1="cSidebar"
   class="d-print-none sidebar sidebar-fixed border-end"
-  colorScheme="dark"
+  colorScheme="light"
   id="sidebar1"
   visible
 >
   <c-sidebar-header class="border-bottom">
-    <c-sidebar-brand [routerLink]="[]">
-      <svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="Pio Logo"></svg>
-      <svg cIcon class="sidebar-brand-narrow" height="32" name="signet" title="Pio Logo"></svg>
+    <c-sidebar-brand [routerLink]="[]" class="d-flex justify-content-center align-items-center px-0">
+      <img src="./assets/brand/logo.svg" alt="logo" height="32" >  
+      <span class="sidebar-brand-full ms-2 fw-semibold">PIONEER POS </span>
     </c-sidebar-brand>
   </c-sidebar-header>
 
