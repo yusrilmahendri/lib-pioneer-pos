@@ -11,58 +11,97 @@ import {
   FormCheckLabelDirective,
   GutterDirective,
   ProgressComponent,
-  RowComponent,
   TableDirective,
   BadgeComponent,
+  ButtonModule,
+  PageItemDirective,
+  PageLinkDirective,
+  PaginationComponent
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { WidgetsBrandComponent } from '../views/widgets/widgets-brand/widgets-brand.component';
-import { NgStyle } from '@angular/common';
+import { NgStyle, CommonModule } from '@angular/common';
+import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch } from '@coreui/icons'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
+import { RouterLink } from '@angular/router';
 
 interface IProduct {
   id: number;
-  nama: string;
+  namaProduk: string;
+  kodeProduk: string;
   kategori: string;
-  harga: number;
+  hargaBeli: number;
+  hargaJual: number;
   stok: number;
-  status: 'Tersedia' | 'Habis';
+  minimalStok: number;
+  tanggalInput: string;
+  status: 'Tersedia' | 'Habis' | 'Stok Menipis';
 }
 
 @Component({
   selector: 'app-products-components',
-  imports: [BadgeComponent, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent],
+  imports: [ButtonModule,ReactiveFormsModule,
+    FormsModule,
+    FormDirective,
+    FormLabelDirective,
+    FormControlDirective, 
+    CommonModule, 
+    BadgeComponent,
+    CardComponent, 
+    CardBodyComponent, 
+    ColComponent, 
+    ButtonDirective, 
+    IconDirective, 
+    ButtonGroupComponent, 
+    FormCheckLabelDirective, 
+    ChartjsComponent, 
+    NgStyle, 
+    CardFooterComponent, 
+    GutterDirective, 
+    ProgressComponent, 
+    WidgetsBrandComponent, 
+    CardHeaderComponent, 
+    TableDirective, 
+    AvatarComponent
+    ,PaginationComponent, 
+    PageItemDirective, 
+    PageLinkDirective, 
+    RouterLink],
   standalone: true,
   templateUrl: './products-components.component.html',
   styleUrl: './products-components.component.scss',
 })
+
 export class ProductsComponentsComponent {
-  // Data dummy untuk tabel produk
   public products: IProduct[] = [];
+  public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch };
 
   constructor() { }
 
   ngOnInit(): void {
     this.doInitTabel();
+
   }
 
   doInitTabel(){
     this.products = [
-      { id: 101, nama: 'Ayam Krispi Original', kategori: 'Makanan', harga: 15000, stok: 50, status: 'Tersedia' },
-      { id: 102, nama: 'Paket Ayam Saus Madu', kategori: 'Makanan', harga: 25000, stok: 30, status: 'Tersedia' },
-      { id: 103, nama: 'Kentang Goreng Reguler', kategori: 'Camilan', harga: 12000, stok: 100, status: 'Tersedia' },
-      { id: 104, nama: 'Minuman Soda (Kaleng)', kategori: 'Minuman', harga: 7000, stok: 0, status: 'Habis' },
-      { id: 105, nama: 'Es Teh Manis', kategori: 'Minuman', harga: 5000, stok: 200, status: 'Tersedia' },
+      { id: 1, namaProduk: 'Ayam Krispi Original', kodeProduk: 'PK-001', kategori: 'Makanan', hargaBeli: 10000, hargaJual: 15000, stok: 50, minimalStok: 10, tanggalInput: '2025-10-01', status: 'Tersedia'},
+      { id: 2, namaProduk: 'Paket Ayam Saus Madu', kodeProduk: 'PK-002', kategori: 'Makanan', hargaBeli: 18000, hargaJual: 25000, stok: 30, minimalStok: 10, tanggalInput: '2025-10-01', status: 'Tersedia' },
+      { id: 3, namaProduk: 'Kentang Goreng Reguler', kodeProduk: 'SN-001', kategori: 'Camilan', hargaBeli: 8000, hargaJual: 12000, stok: 100, minimalStok: 20, tanggalInput: '2025-10-02', status: 'Tersedia' },
+      { id: 4, namaProduk: 'Minuman Soda (Kaleng)', kodeProduk: 'BV-001', kategori: 'Minuman', hargaBeli: 5000, hargaJual: 7000, stok: 0, minimalStok: 10, tanggalInput: '2025-10-02', status: 'Habis' },
+      { id: 5, namaProduk: 'Es Teh Manis', kodeProduk: 'BV-002', kategori: 'Minuman', hargaBeli: 2000, hargaJual: 5000, stok: 8, minimalStok: 10, tanggalInput: '2025-10-03', status: 'Stok Menipis' },
     ];
   }
 
-  // Fungsi untuk format Rupiah (bisa dipindahkan ke service nanti)
   formatRupiah(amount: number): string {
     return 'Rp ' + amount.toLocaleString('id-ID');
   }
 
-  // Fungsi untuk mendapatkan warna badge berdasarkan status
-  getStatusColor(status: 'Tersedia' | 'Habis'): string {
-    return status === 'Tersedia' ? 'success' : 'danger';
+  getStatusColor(status: 'Tersedia' | 'Habis' | 'Stok Menipis'): string {
+    if (status === 'Tersedia') return 'success';
+    if (status === 'Habis') return 'danger';
+    return 'warning'; // Untuk 'Stok Menipis'
   }
 }

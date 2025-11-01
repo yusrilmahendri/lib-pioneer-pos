@@ -1,92 +1,107 @@
-<c-card class="mb-4">
-  <c-card-header>
-    <c-row class="align-items-center">
-      <c-col md="6">
-        <h4 class="m-0">Kelola Produk</h4>
-      </c-col>
-      <c-col md="6" class="text-end">
-        <button cButton color="primary">
-          <!-- <svg cIcon [content]="icons.cilPlus" class="me-2"></svg> -->
-          Tambah Produk Baru
-        </button>
-      </c-col>
-    </c-row>
-  </c-card-header>
+<c-card>
   <c-card-body>
-    <!-- PERUBAHAN: Menambahkan Filter Kategori dan menyesuaikan layout kolom -->
-    <c-row class="mb-3 align-items-center">
-      <!-- Dropdown Filter Kategori -->
-      <c-col md="3">
-        <select cSelect id="filterKategori" aria-label="Filter Kategori">
-          <option value="">Semua Kategori</option>
-          <option value="Makanan">Makanan</option>
-          <option value="Minuman">Minuman</option>
-          <option value="Camilan">Camilan</option>
-        </select>
-      </c-col>
-      <!-- Input Pencarian -->
-      <c-col md="4">
-        <input cFormControl placeholder="Cari produk..." />
-      </c-col>
-    </c-row>
-    
-    <!-- Tabel Data Produk -->
-    <table cTable [hover]="true" [striped]="true" [responsive]="true" class="border align-middle">
-      <thead cTableColor="light">
-        <tr>
-          <!-- PERUBAHAN: Kolom ID dan Nama Produk digabung -->
-          <th>Info Produk</th>
-          <th>Kategori</th>
-          <th class="text-end">Harga</th>
-          <th class="text-center">Stok</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Loop data produk menggunakan *ngFor -->
-        <tr *ngFor="let product of products">
-          <!-- PERUBAHAN: Info Produk digabung -->
-          <td>
-            <div><strong>{{ product.nama }}</strong></div>
-            <small class="text-body-secondary">ID: #{{ product.id }}</small>
-          </td>
-          <td>
-            {{ product.kategori }}
-          </td>
-          <td class="text-end">
-            {{ formatRupiah(product.harga) }}
-          </td>
-          <td class="text-center">
-            {{ product.stok }}
-          </td>
-          <td class="text-center">
-            <c-badge [color]="getStatusColor(product.status)" shape="rounded-pill">
-              {{ product.status }}
-            </c-badge>
-          </td>
-          <td class="text-center">
-            <!-- Tombol Aksi (Edit/Delete) -->
-            <c-button-group role="group">
-              <button cButton color="info" variant="outline" size="sm">
-                <!-- <svg cIcon [content]="icons.cilPencil"></svg> -->
-              </button>
-              <button cButton color="danger" variant="outline" size="sm">
-                <!-- <svg cIcon [content]="icons.cilTrash"></svg> -->
-              </button>
-            </c-button-group>
-          </td>
-        </tr>
-        
-        <!-- Tampilan jika data kosong -->
-        <tr *ngIf="products.length === 0">
-          <td colspan="7" class="text-center text-body-secondary p-4">
-            Tidak ada data produk yang ditemukan.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Tombol atas -->
+    <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
+      <button class="btn btn-dark d-flex align-items-center">
+         <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
+      </button>
+      <button class="btn btn-primary d-flex align-items-center">
+         <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Produk
+      </button>
+    </div>
 
+    <!-- Form filter dan pencarian -->
+    <form>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="mb-0 mt-3">
+          <select class="form-select form-select-sm w-auto">
+            <option>5</option>
+            <option>10</option>
+            <option>25</option>
+          </select>
+        </div>
+        <div class="position-relative w-25 mb-3 mt-3">
+          <input
+            type="text"
+            class="form-control form-control ps-5"
+            placeholder="Cari Nama atau Kode Produk..."
+          
+          />
+          <svg [cIcon]="icons.cilSearch" width="16" height="16" class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></svg>  
+        </div>
+      </div>
+    </form>
+
+    <!-- Tabel produk -->
+    <div class="table-responsive">
+      <table [striped]="true" cTable class="align-middle">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nama Produk</th>
+            <th scope="col">Kode Produk</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Harga Beli</th>
+            <th scope="col">Harga Jual</th>
+            <th scope="col">Stok</th>
+            <th scope="col">Minimal Stok</th>
+            <th scope="col">Tanggal Input</th>
+            <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ product.namaProduk }}</td>
+            <td>{{ product.kodeProduk }}</td>
+            <td>{{ product.kategori }}</td>
+            <td>{{ formatRupiah(product.hargaBeli) }}</td>
+            <td>{{ formatRupiah(product.hargaJual) }}</td>
+            <td [ngClass]="{'text-danger': product.stok === 0}">{{ product.stok }}</td>
+            <td>{{ product.minimalStok }}</td>
+            <td>{{ product.tanggalInput }}</td>
+            <td>
+              <c-badge [color]="getStatusColor(product.status)">
+                {{ product.status }}
+              </c-badge>
+            </td>
+            <td>
+              <button class="icon-button me-2">
+                <svg [cIcon]="icons.cilPencil" width="16" height="16" class="text-primary"></svg>
+              </button>
+              <button class="icon-button">
+                <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="text-muted small mb-0">
+          Menampilkan 1–{{ products.length }} dari {{ products.length }} hasil
+      </p>
+
+      <c-pagination aria-label="Page navigation example">
+        <li cPageItem>
+          <a cPageLink aria-label="Previous" [routerLink]><span aria-hidden="true">&laquo;</span></a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>1</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>2</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>3</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink aria-label="Next" [routerLink]><span aria-hidden="true">&raquo;</span></a>
+        </li>
+      </c-pagination>
+    </div>
+   
   </c-card-body>
 </c-card>
-
