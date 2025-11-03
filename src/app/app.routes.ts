@@ -5,6 +5,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ProductsComponentsComponent } from './products-components/products-components.component';
 import { PenjualanComponentsComponent } from './penjualan-components/penjualan-components.component';
+import { PengeluaranComponentsComponent } from './pengeluaran-components/pengeluaran-components.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
         { path: 'products', component: ProductsComponentsComponent, data: { title: 'Kelola Produk' } },
         { path: 'penjualan', component: PenjualanComponentsComponent, data: { title: 'Kelola Penjualan' } },
+        { path: 'pengeluaran', component: PengeluaranComponentsComponent, data: { title: 'Kelola Pengeluaran' } },
     ]
   },
   // Rute-rute ini ditampilkan DI LUAR layout

@@ -1,39 +1,40 @@
- <c-row class="g-4">
-
+<!-- Dashboard -->
+<c-row class="g-4" *ngIf="activeRouteName() === 'dashboard'">
   <c-col xl="3" md="6" sm="6">
-     <c-widget-stat-b
-       [title]="'Total Transaksi'"
-       text="200"
-       value="Total Transaksi"
-     >
-     </c-widget-stat-b>
+    <c-widget-stat-b [title]="'Total Transaksi'" text="200" value="Total Transaksi"></c-widget-stat-b>
   </c-col>
 
   <c-col xl="3" md="6" sm="6">
-     <c-widget-stat-b
-      [title]="'Rp.'"
-            text="150.0000.000"
-            value="Total Pendapatan"
-          >
-           
-          </c-widget-stat-b>
-        </c-col>
-        <c-col xl="3" md="6" sm="6">
-          <c-widget-stat-b
-            [title]="'Rp.'"
-            text="200.000.000"
-            value="Total Pengeluaran"
-          >
-           
-          </c-widget-stat-b>
-        </c-col>
-        <c-col xl="3" md="6" sm="6">
-          <c-widget-stat-b
-            [title]="'Rp.'"
-            text="20.000.000"
-            value="Laba Kotor"
-          >
-         
-          </c-widget-stat-b>
-    </c-col>
+    <c-widget-stat-b [title]="'Rp.'" text="150.000.000" value="Total Pendapatan"></c-widget-stat-b>
+  </c-col>
+
+  <c-col xl="3" md="6" sm="6">
+    <c-widget-stat-b [title]="'Rp.'" text="200.000.000" value="Total Pengeluaran"></c-widget-stat-b>
+  </c-col>
+
+  <c-col xl="3" md="6" sm="6">
+    <c-widget-stat-b [title]="'Rp.'" text="20.000.000" value="Laba Kotor"></c-widget-stat-b>
+  </c-col>
+</c-row>
+
+<!-- Penjualan -->
+<c-row class="g-4" *ngIf="activeRouteName() === 'penjualan'">
+  <c-col xl="4" md="6" sm="6">
+    <c-widget-stat-b [title]="'Total Transaksi'" text="200" value="Total Transaksi"></c-widget-stat-b>
+  </c-col>
+
+  <c-col xl="4" md="6" sm="6">
+    <c-widget-stat-b [title]="'Rp.'" text="150.000.000" value="Total Pendapatan"></c-widget-stat-b>
+  </c-col>
+
+  <c-col xl="4" md="6" sm="6">
+    <c-widget-stat-b [title]="'Rp.'" text="20.000.000" value="Laba Kotor"></c-widget-stat-b>
+  </c-col>
+</c-row>
+
+<!-- Pengeluaran -->
+<c-row class="g-4" *ngIf="activeRouteName() === 'pengeluaran'">
+  <c-col xl="12" md="6" sm="6">
+    <c-widget-stat-b [title]="'Rp.'" text="200.000.000" value="Total Pengeluaran"></c-widget-stat-b>
+  </c-col>
 </c-row>

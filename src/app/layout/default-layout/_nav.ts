@@ -18,7 +18,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Pengeluaran',
-    url: '/expenses', // URL placeholder diperbarui
+    url: '/pengeluaran', // URL placeholder diperbarui
     iconComponent: { name: 'cil-wallet' } // Menggantikan 'cil-pencil'
   },
   {
