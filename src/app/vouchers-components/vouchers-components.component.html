@@ -1,0 +1,105 @@
+<c-card>
+  <c-card-body>
+    <!-- Tombol atas -->
+    <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
+      <button class="btn btn-dark d-flex align-items-center">
+         <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
+      </button>
+      <button class="btn btn-primary d-flex align-items-center">
+         <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Voucher
+      </button>
+    </div>
+
+    <!-- Form filter dan pencarian -->
+    <form>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="mb-0 mt-3">
+          <select class="form-select form-select-sm w-auto">
+            <option>5</option>
+            <option>10</option>
+            <option>25</option>
+          </select>
+        </div>
+        <div class="position-relative w-25 mb-3 mt-3">
+          <input
+            type="text"
+            class="form-control form-control ps-5"
+            placeholder="Cari..."
+          
+          />
+          <svg [cIcon]="icons.cilSearch" width="16" height="16" class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></svg>  
+        </div>
+      </div>
+    </form>
+
+    <!-- Tabel produk -->
+    <div class="table-responsive" >
+      <table [striped]="true" cTable class="align-middle">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Tanggal Input</th>
+            <th scope="col">Kode Promo</th>
+            <th scope="col">Deskripsi</th>
+            <th scope="col">Tipe Promo</th>
+            <th scope="col">Tanggal Mulai</th>
+            <th scope="col">Tanggal Selesai</th>
+            <th scope="col">Kouta Promo</th>
+            <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let voucher of vouchers; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ voucher.tanggalInput }}</td>
+            <td>{{ voucher.kodePromo }}</td>
+            <td>{{ voucher.deskripsi }}</td>
+            <td>{{ voucher.tipePromo }}</td>
+            <td>{{ voucher.tanggalMulai }}</td>
+            <td>{{ voucher.tanggalSelesai }}</td>
+            <td>{{ voucher.koutaPromo }}</td>
+            <td>
+              <c-badge [color]="getStatusColor(voucher.status)">
+                {{ voucher.status }}
+              </c-badge>
+            </td>
+            <td>
+              <button class="icon-button me-2">
+                <svg [cIcon]="icons.cilPencil" width="16" height="16" class="text-primary"></svg>
+              </button>
+              <button class="icon-button">
+                <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="text-muted small mb-0">
+          Menampilkan 1–{{ vouchers.length }} dari {{ vouchers.length }} hasil
+      </p>
+
+      <c-pagination aria-label="Page navigation example">
+        <li cPageItem>
+          <a cPageLink aria-label="Previous" [routerLink]><span aria-hidden="true">&laquo;</span></a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>1</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>2</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink [routerLink]>3</a>
+        </li>
+        <li cPageItem>
+          <a cPageLink aria-label="Next" [routerLink]><span aria-hidden="true">&raquo;</span></a>
+        </li>
+      </c-pagination>
+    </div>
+   
+  </c-card-body>
+</c-card>
