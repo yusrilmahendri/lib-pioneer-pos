@@ -134,30 +134,30 @@ export class ProductsComponentsComponent {
       this.visibleCreateProduct = true;
     }
 
-openDeleteProductModal(product: IProduct) {
-  Swal.fire({
-    title: `Hapus produk "${product.namaProduk}"?`,
-    text: "Data produk akan dihapus permanen!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Ya, hapus!',
-    cancelButtonText: 'Batal',
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // hapus produk dari array
-      this.products = this.products.filter(p => p.id !== product.id);
+  openDeleteProductModal(product: IProduct) {
+    Swal.fire({
+      title: `Hapus produk "${product.namaProduk}"?`,
+      text: "Data produk akan dihapus permanen!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // hapus produk dari array
+        this.products = this.products.filter(p => p.id !== product.id);
 
-      // notifikasi berhasil
-      Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: `Produk "${product.namaProduk}" berhasil dihapus!`,
-        timer: 2000,
-        showConfirmButton: false
-      });
-    }
-  });
-}
+        // notifikasi berhasil
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: `Produk "${product.namaProduk}" berhasil dihapus!`,
+          timer: 2000,
+          showConfirmButton: false
+        });
+      }
+    });
+  }
 }

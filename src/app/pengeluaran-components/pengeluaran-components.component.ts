@@ -34,6 +34,7 @@ import { RouterLink } from '@angular/router';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import  { CreatePengeluaranComponentsComponent } from './create-pengeluaran-components/create-pengeluaran-components.component';
+import Swal from 'sweetalert2';
 
 interface IPengeluaran {
   id: number;
@@ -41,7 +42,7 @@ interface IPengeluaran {
   kategori_pengeluaran: string;
   deskripsi: string;
   total: number;
-  user: number;
+  user: string;
   lampiran: string;
 }
 
@@ -109,7 +110,7 @@ export class PengeluaranComponentsComponent {
           kategori_pengeluaran: 'Makanan',
           deskripsi: 'Pembelian makanan',
           total: 150000,
-          user: 1,
+          user: 'yusril',
           lampiran: 'invoice_1.pdf',
         },
         {
@@ -117,14 +118,14 @@ export class PengeluaranComponentsComponent {
           tanggal: '2024-01-02',
           kategori_pengeluaran: 'Transportasi',
           deskripsi: 'Pembelian tiket kereta',
-          user: 2,
+          user: 'mahendri',
           lampiran: 'invoice_2.pdf',
           total: 75000,
         },
         // Tambahkan data penjualan lainnya sesuai kebutuhan
       ];    
     }
-  
+
     formatRupiah(amount: number): string {
       return 'Rp ' + amount.toLocaleString('id-ID');
     }
@@ -132,5 +133,31 @@ export class PengeluaranComponentsComponent {
     openCreatePengeluaranModal(){
       this.visibleCreatePengeluaran = true
     }
+  
+    openDeletePengeluaranModal(pengeluaran: IPengeluaran) {
+      Swal.fire({
+        title: `Hapus data kategori pengeluaran "${pengeluaran.kategori_pengeluaran}"?`,
+        text: "Kategori data pengeluaran akan dihapus permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // hapus produk dari array
+          this.pengeluarans = this.pengeluarans.filter(p => p.id !== pengeluaran.id);
 
-}
+          // notifikasi berhasil
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: `Kategori data pengeluaran "${pengeluaran.kategori_pengeluaran}" berhasil dihapus!`,
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
+    }
+  }

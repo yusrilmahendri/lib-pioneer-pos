@@ -110,8 +110,8 @@
               <button class="icon-button me-2">
                 <svg [cIcon]="icons.cilPrint" width="16" height="16" class="text-primary"></svg>
               </button>
-              <button class="icon-button btn-danger me-2">
-                <i class="fas fa-trash"></i>
+              <button class="icon-button btn-danger me-2" (click)="openDeletePengeluaranModal(pengeluaran)">
+                <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
               </button>
             </td>
           </tr>
