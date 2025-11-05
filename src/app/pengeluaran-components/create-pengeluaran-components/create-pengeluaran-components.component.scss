@@ -1,98 +1,37 @@
-.modal-content {
-  background: #ffffff;
-  border-radius: 1rem;
-  border: none;
+// Wrapper untuk Ikon di KIRI (misal: Lampiran)
+.input-icon-wrapper-left {
+  position: relative;
+
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px; // Posisi di kiri
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+  }
+  
+  .form-control {
+    padding-left: 35px; // Ruang untuk ikon di kiri
+    
+    // Memberi style pada teks 'Choose file' agar pas
+    &::file-selector-button {
+      margin-left: -5px;
+      border: none;
+      background: none;
+      color: #6c757d;
+      font-weight: 500;
+    }
+  }
 }
 
-.table {
-  font-size: 0.95rem;
-}
-
-.badge.bg-primary-subtle {
-  background-color: #e8f0ff !important;
-  color: #0046ff !important;
-}
-
-.btn-primary {
-  background-color: #2563eb !important;
-  border: none;
-}
-
-.btn-outline-primary {
-  border-color: #2563eb !important;
-  color: #2563eb !important;
+// Style tombol 'Batal' dari contoh Anda
+.btn-cancel {
+  border-color: #0d6efd; // Pastikan warna outline-primary
+  color: #0d6efd;
 
   &:hover {
-    background-color: #2563eb !important;
-    color: white !important;
-  }
-}
-/* :host is used to scope styles to this component.
-  ::ng-deep is used to pierce shadow DOM or component encapsulation 
-  when styling child components or elements dynamically. 
-  Use it sparingly.
-*/
-
-:host {
-  // This class replaces the inline style for the modal backdrop
-  .custom-modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1050; // Ensure it's above other content
-  }
-
-  // This class replaces the inline style for the 'Lunas' badge
-  .status-badge-custom {
-    background-color: #e0f2ff !important;
-    color: #007bff !important;
-  }
-
-  // This class replaces the inline style for the summary block
-  .summary-block {
-    width: 280px; // Fixed width to align totals
-  }
-
-  // Optional: Clean up the 'x' button
-  .btn-close-custom {
-    padding: 0;
-    line-height: 1;
-    &:hover {
-      color: #000; // Darken on hover
-    }
-  }
-
-  // Optional: Enforce text-align from the image
-  .table {
-    th, td {
-      vertical-align: middle;
-    }
-    
-    // Align columns just like the image
-    // Col 1 (Nama), 2 (Kode) are left-aligned by default
-    
-    // Qty
-    td:nth-child(3) {
-      text-align: center;
-    }
-
-    // Harga, Subtotal
-    th:nth-child(4),
-    td:nth-child(4),
-    th:nth-child(5),
-    td:nth-child(5) {
-      text-align: right;
-    }
-  }
-
-  // Ensure 'Kembalian' text is aligned
-  .payment-row {
-    .text-primary {
-      // In case 'Kembalian' text is longer
-      min-width: 100px; 
-    }
+    background-color: #0d6efd;
+    color: #fff;
   }
 }

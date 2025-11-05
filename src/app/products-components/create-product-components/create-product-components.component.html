@@ -1,7 +1,7 @@
-<c-modal [visible]="visible" (visibleChange)="visibleChange.emit($event)" size="lg">
+<c-modal [visible]="visible" (visibleChange)="visibleChange.emit($event)" size="lg" alignment="center">
   <c-modal-header>
     <h5 cModalTitle>Tambah Produk</h5>
-    <button type="button" cButtonClose (click)="close()"></button>
+    <button type="button" cButtonClose (click)="onClose()"></button>
   </c-modal-header>
 
   <c-modal-body>
@@ -78,21 +78,22 @@
   </c-modal-body>
 
   <c-modal-footer class="d-flex justify-content-between align-items-center gap-3">
+    <!-- Mengadopsi style tombol dari contoh Anda -->
     <button
-        type="button"
         class="btn btn-outline-primary flex-fill py-2 fw-semibold btn-cancel"
-        (click)="close()"
+        (click)="onClose()"
     >
         Batal
     </button>
 
     <button
+        cButton
         type="button"
         class="btn btn-secondary flex-fill py-2 fw-semibold"
-        (click)="submit()"
+        (click)="onSubmit()"
         [disabled]="form.invalid"
     >
         Simpan
     </button>
-</c-modal-footer>
+  </c-modal-footer>
 </c-modal>

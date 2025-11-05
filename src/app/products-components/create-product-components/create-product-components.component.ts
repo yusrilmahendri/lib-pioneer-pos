@@ -48,15 +48,15 @@ export class CreateProductComponentsComponent {
     });
   }
 
-  close() {
+  onClose() {
     this.visible = false;
     this.visibleChange.emit(false);
   }
 
-  submit() {
+  onSubmit() {
     if (this.form.valid) {
       console.log('✅ Data Produk:', this.form.value);
-      this.close();
+      this.onClose();
     }
   }
 }
