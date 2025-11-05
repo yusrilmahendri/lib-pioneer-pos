@@ -22,7 +22,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-widgets',
-  standalone: true, // ✅ penting!
+  styleUrls: ['./widgets.component.scss'],
+  standalone: true, 
   templateUrl: './widgets.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [

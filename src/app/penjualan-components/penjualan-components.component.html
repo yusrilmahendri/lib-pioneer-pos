@@ -1,12 +1,51 @@
 <c-card>
   <c-card-body>
 
+     <c-card class="mb-4 shadow-sm rounded-3 bg-light border-0">
+        <c-card-body class="d-flex align-items-center py-3 px-4">
+          <i class="fa-solid fa-bag-shopping fa-2x me-3" style="color: #007bff;"></i>
+          <div class="d-flex align-items-center flex-wrap">
+            <h5 class="mb-0 me-3 fw-semibold text-dark">
+              Detail Bisnis Anda <span class="fw-bold">Coffee Mawang</span>, Pangkalpinang
+            </h5>
+            <span
+              class="badge text-dark"
+              style="background-color: #CDE0FE; border-radius: 0.5rem; padding: 6px 12px;"
+            >
+              Aktif
+            </span>
+          </div>
+        </c-card-body>
+      </c-card>
+
+
     <app-widgets/>
-    <!-- Tombol atas -->
-    <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
-      <button class="btn btn-dark d-flex align-items-center">
-         <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
-      </button>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="mb-0 mt-3 mb-3">
+          <form class="position-relative d-inline-block">
+            <input
+              type="text"
+              placeholder="Filter Periode"
+              class="form-control ps-5"
+              bsDatepicker
+              [(ngModel)]="selectedDate"
+              name="selectedDate">
+
+            <svg
+              [cIcon]="icons.cilCalendar"
+              width="18"
+              height="18"
+              class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary">
+            </svg>
+          </form>
+        </div>
+
+      <div class="d-flex justify-content-end gap-3 mb-3 mt-3">
+        <button class="btn btn-dark d-flex align-items-center">
+          <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
+        </button>
+      </div>
     </div>
 
     <!-- Form filter dan pencarian -->
@@ -23,7 +62,7 @@
           <input
             type="text"
             class="form-control form-control ps-5"
-            placeholder="Cari Nama atau Kode Produk..."
+            placeholder="Cari..."
           
           />
           <svg [cIcon]="icons.cilSearch" width="16" height="16" class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></svg>  
@@ -62,11 +101,11 @@
               </c-badge>
             </td>
             <td>
-              <button class="icon-button me-2">
-                <svg [cIcon]="icons.cilYen" width="16" height="16" class="text-primary"></svg>
+              <button class="icon-button me-2 color-blue">
+                <i class="fa fa-eye"></i>
               </button>
               <button class="icon-button me-2">
-                <svg [cIcon]="icons.cilPrint" width="16" height="16" class="text-primary"></svg>
+                <svg [cIcon]="icons.cilPrint" width="16" height="16" class="color-blue"></svg>
               </button>
             </td>
           </tr>

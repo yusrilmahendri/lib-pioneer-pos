@@ -22,11 +22,12 @@ import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { WidgetsBrandComponent } from '../views/widgets/widgets-brand/widgets-brand.component';
 import { NgStyle, CommonModule } from '@angular/common';
-import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch, cilYen } from '@coreui/icons'; 
+import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch, cilYen, cilCalendar } from '@coreui/icons'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
 import { RouterLink } from '@angular/router';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 interface IPenjualan {
   id: number;
@@ -70,7 +71,8 @@ interface IPenjualan {
     ProgressComponent,
     WidgetsBrandComponent,
     RouterLink,
-    WidgetsComponent
+    WidgetsComponent,
+    BsDatepickerModule,
   ],
   standalone: true,
   templateUrl: './penjualan-components.component.html',
@@ -79,7 +81,15 @@ interface IPenjualan {
 export class PenjualanComponentsComponent {
 
 public penjualans: IPenjualan[] = [];
-public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch, cilYen };
+public icons = { cilPencil, 
+  cilTrash, 
+  cilPlus, 
+  cilPrint, 
+  cilSearch, 
+  cilYen,
+  cilCalendar
+};
+selectedDate: string = '';
 
 constructor() { }
 

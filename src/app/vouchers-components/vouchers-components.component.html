@@ -1,14 +1,34 @@
 <c-card>
   <c-card-body>
-    <!-- Tombol atas -->
-    <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
-      <button class="btn btn-dark d-flex align-items-center">
-         <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
-      </button>
-      <button class="btn btn-primary d-flex align-items-center">
-         <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Voucher
-      </button>
-    </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <form class="position-relative d-inline-block">
+            <label for="paymentType" class="fw-bold mb-2">Jenis Pembayaran</label><br />
+            <select
+              id="paymentType"
+              class="form-select form-select-md-12  w-auto"
+            >
+              <option>Pilih Jenis Pembayaran</option>
+              <option>Cash</option>
+              <option>Credit Card</option>
+              <option>Bank Transfer</option>
+              <option>Qris</option>
+            </select>
+          </form>
+        </div>
+
+        <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
+          <button class="btn btn-dark d-flex align-items-center">
+            <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
+          </button>
+           <button
+              class="btn d-flex align-items-center"
+              style="background-color: #007bff; color: #fff; border: none;"
+            >
+              <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Pengeluaran
+            </button>
+        </div>
+      </div>
 
     <!-- Form filter dan pencarian -->
     <form>
@@ -66,7 +86,7 @@
             </td>
             <td>
               <button class="icon-button me-2">
-                <svg [cIcon]="icons.cilPencil" width="16" height="16" class="text-primary"></svg>
+                <svg [cIcon]="icons.cilPencil" width="16" height="16" class="color-blue"></svg>
               </button>
               <button class="icon-button">
                 <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
