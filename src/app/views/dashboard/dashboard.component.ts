@@ -1,9 +1,7 @@
 import { NgStyle } from '@angular/common';
 import { Component, DestroyRef, DOCUMENT, effect, inject, OnInit, Renderer2, signal, WritableSignal } from '@angular/core';
-// Hapus import: import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChartOptions } from 'chart.js';
 import {
-  AvatarComponent,
   ButtonDirective,
   ButtonGroupComponent,
   CardBodyComponent,
@@ -16,17 +14,24 @@ import {
   ProgressComponent,
   RowComponent,
   TableDirective,
-  BadgeComponent
+  BadgeComponent,
 } from '@coreui/angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { IconDirective } from '@coreui/icons-angular';
-
 import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 import datalabels from 'chartjs-plugin-datalabels';
 import { WidgetsComponent } from '../widgets/widgets/widgets.component';
-import { cilStorage, cilFilter, cilPrint, cilArrowTop, cilOptions } from '@coreui/icons';
+import { cilStorage, 
+  cilFilter, 
+  cilPrint, 
+  cilArrowTop, 
+  cilOptions,
+  cilCalendar
+} from '@coreui/icons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Jika Anda masih menggunakan tabel users di HTML, biarkan interface ini.
 interface IUser {
@@ -47,7 +52,30 @@ interface IUser {
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss'],
   standalone: true,
-  imports: [WidgetsDropdownComponent, BadgeComponent, WidgetsComponent, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
+  imports: [
+    WidgetsDropdownComponent, 
+    BadgeComponent,
+    WidgetsComponent, 
+    CardComponent, 
+    CardBodyComponent,
+    RowComponent, 
+    ColComponent, 
+    ButtonDirective, 
+    IconDirective, 
+    ButtonGroupComponent,
+    FormCheckLabelDirective, 
+    ChartjsComponent, 
+    NgStyle,
+    CardFooterComponent, 
+    GutterDirective, 
+    ProgressComponent, 
+    WidgetsBrandComponent, 
+    CardHeaderComponent, 
+    TableDirective,
+    BsDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class DashboardComponent implements OnInit {
 
@@ -73,10 +101,13 @@ export class DashboardComponent implements OnInit {
     cilStorage,
     cilFilter,
     cilPrint,
-    cilArrowTop, // (Untuk widget lama, jika masih ada)
-    cilOptions  // (Untuk widget lama, jika masih ada)
+    cilArrowTop, 
+    cilOptions,  
+    cilCalendar
   };
   
+  selectedDate: string = '';
+
   constructor(
   ) {
   }

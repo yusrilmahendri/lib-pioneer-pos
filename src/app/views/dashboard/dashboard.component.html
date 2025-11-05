@@ -1,5 +1,33 @@
 <c-card>
     <c-card-body>
+ 
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="mb-0 mt-3 mb-3">
+          <form class="position-relative d-inline-block">
+            <input
+              type="text"
+              placeholder="Filter Periode"
+              class="form-control ps-5"
+              bsDatepicker
+              [(ngModel)]="selectedDate"
+              name="selectedDate">
+
+            <svg
+              [cIcon]="icons.cilCalendar"
+              width="18"
+              height="18"
+              class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary">
+            </svg>
+          </form>
+        </div>
+
+      <div class="d-flex justify-content-end gap-3 mb-3 mt-3">
+        <button class="btn btn-dark d-flex align-items-center">
+          <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
+        </button>
+      </div>
+    </div>
+
       <app-widgets/>
         <c-card class="my-4">
           <c-card-header>
