@@ -6,21 +6,44 @@
   }
 }
 
-form {
-  .form-control {
-    border-radius: 8px;
-    border: 1px solid #ced4da;
-    transition: all 0.2s ease-in-out;
+// 🎨 Custom styling for ngx-bootstrap datepicker
+::ng-deep .bs-datepicker {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 0.5rem 1rem;
 
-    &:focus {
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+
+
+  .bs-datepicker-body {
+    background: #f9f9f9;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    table {
+      width: 100%;
+      text-align: center;
     }
-  }
 
-  svg {
-    pointer-events: none; // biar klik tetap fokus ke input
-    color: #6c757d;
+    td, th {
+      border-radius: 0.5rem;
+      transition: 0.2s;
+    }
+
+    td span {
+      padding: 6px 10px;
+    }
+
+    td span:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    td.selected span {
+      background-color: #007bff !important;
+      color: #fff !important;
+    }
   }
 }
 
