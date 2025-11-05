@@ -13,10 +13,14 @@ import {
   ProgressComponent,
   TableDirective,
   BadgeComponent,
-  ButtonModule,
   PageItemDirective,
   PageLinkDirective,
-  PaginationComponent
+  PaginationComponent,
+  ButtonCloseDirective,
+  ModalBodyComponent,
+  ModalComponent,
+  ModalHeaderComponent,
+  ModalTitleDirective
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
@@ -26,6 +30,7 @@ import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch } from '@coreui/icon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
 import { RouterLink } from '@angular/router';
+import { CreateVoucherComponent } from './create-voucher/create-voucher.component';
 
 interface IProduct {
   id: number;
@@ -67,16 +72,18 @@ interface IProduct {
     ,PaginationComponent, 
     PageItemDirective, 
     PageLinkDirective, 
-    RouterLink
+    RouterLink,
+    CreateVoucherComponent,
   ],
   standalone: true,
   templateUrl: './vouchers-components.component.html',
   styleUrl: './vouchers-components.component.scss',
 })
 export class VouchersComponentsComponent {
- public vouchers: IProduct[] = [];
+  public vouchers: IProduct[] = [];
   public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch };
-
+  public visibleCreateVoucher = false;
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -117,5 +124,9 @@ export class VouchersComponentsComponent {
     if (status === 'Aktif') return 'success';
     if (status === 'Selesai') return 'danger';
     return 'warning'; // Untuk 'Kadaluarsa'
+  }
+
+  onCreateVoucher(){
+    this.visibleCreateVoucher = true;
   }
 }

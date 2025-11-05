@@ -1,0 +1,10 @@
+// Style tombol 'Batal' dari contoh Anda
+.btn-cancel {
+  border-color: #0d6efd; // Pastikan warna outline-primary
+  color: #0d6efd;
+
+  &:hover {
+    background-color: #0d6efd;
+    color: #fff;
+  }
+}
