@@ -1,6 +1,6 @@
 <c-modal [visible]="visible" (visibleChange)="visibleChange.emit($event)" size="lg" alignment="center">
   <c-modal-header>
-    <h5 cModalTitle>Tambah Produk</h5>
+    <h5 class="fw-semibold">{{ title }}</h5>
     <button type="button" cButtonClose (click)="onClose()"></button>
   </c-modal-header>
 

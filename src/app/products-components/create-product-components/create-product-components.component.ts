@@ -32,6 +32,11 @@ import {
 export class CreateProductComponentsComponent {
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
+
+   // properti tambahan untuk mode/titel
+  @Input() mode: 'create' | 'edit' = 'create';
+  @Input() product: any = null; // data produk jika edit
+
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -48,6 +53,12 @@ export class CreateProductComponentsComponent {
     });
   }
 
+  ngOnChanges() {
+    if (this.mode === 'edit' && this.product) {
+      this.form.patchValue(this.product);
+    }
+  }
+
   onClose() {
     this.visible = false;
     this.visibleChange.emit(false);
@@ -58,5 +69,9 @@ export class CreateProductComponentsComponent {
       console.log('✅ Data Produk:', this.form.value);
       this.onClose();
     }
+  }
+
+  get title() {
+    return this.mode === 'create' ? 'Tambah Produk' : 'Edit Produk';
   }
 }
