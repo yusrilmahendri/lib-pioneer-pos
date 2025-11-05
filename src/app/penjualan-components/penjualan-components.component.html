@@ -101,9 +101,14 @@
               </c-badge>
             </td>
             <td>
-              <button class="icon-button me-2 color-blue">
+              <button class="icon-button me-2 color-blue" (click)="onDetailPenjualan()">
                 <i class="fa fa-eye"></i>
               </button>
+              <app-detail-penjualan
+                [visible]="visibleCreatePengeluaran"
+                (visibleChange)="visibleCreatePengeluaran = $event" >
+              </app-detail-penjualan>
+
               <button class="icon-button me-2">
                 <svg [cIcon]="icons.cilPrint" width="16" height="16" class="color-blue"></svg>
               </button>

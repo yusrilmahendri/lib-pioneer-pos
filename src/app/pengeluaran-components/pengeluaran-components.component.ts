@@ -17,6 +17,11 @@ import {
   PageItemDirective,
   PageLinkDirective,
   PaginationComponent,
+  ButtonCloseDirective,
+  ModalBodyComponent,
+  ModalComponent,
+  ModalHeaderComponent,
+  ModalTitleDirective
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
@@ -28,6 +33,7 @@ import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui
 import { RouterLink } from '@angular/router';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import  { CreatePengeluaranComponentsComponent } from './create-pengeluaran-components/create-pengeluaran-components.component';
 
 interface IPengeluaran {
   id: number;
@@ -42,6 +48,7 @@ interface IPengeluaran {
 
 @Component({
   selector: 'app-pengeluaran-components',
+  standalone: true,
   imports: [ ButtonModule,
     ReactiveFormsModule,
     FormsModule,
@@ -71,7 +78,13 @@ interface IPengeluaran {
     WidgetsBrandComponent,
     RouterLink,
     WidgetsComponent,
-    BsDatepickerModule
+    BsDatepickerModule,
+    ModalComponent,
+    ModalHeaderComponent,
+    ModalTitleDirective,
+    ButtonCloseDirective,
+    ModalBodyComponent,
+    CreatePengeluaranComponentsComponent
   ],
   templateUrl: './pengeluaran-components.component.html',
   styleUrl: './pengeluaran-components.component.scss',
@@ -79,8 +92,8 @@ interface IPengeluaran {
 export class PengeluaranComponentsComponent {
   public pengeluarans: IPengeluaran[] = [];
   public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch, cilYen, cilCalendar };
- 
   selectedDate: string = '';
+  public visibleCreatePengeluaran = false;
  
   constructor() { }
   
@@ -115,4 +128,9 @@ export class PengeluaranComponentsComponent {
     formatRupiah(amount: number): string {
       return 'Rp ' + amount.toLocaleString('id-ID');
     }
+
+    openCreatePengeluaranModal(){
+      this.visibleCreatePengeluaran = true
+    }
+
 }

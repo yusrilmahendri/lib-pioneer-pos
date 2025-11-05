@@ -17,6 +17,11 @@ import {
   PageItemDirective,
   PageLinkDirective,
   PaginationComponent,
+  ButtonCloseDirective,
+  ModalBodyComponent,
+  ModalComponent,
+  ModalHeaderComponent,
+  ModalTitleDirective
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
@@ -28,6 +33,7 @@ import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui
 import { RouterLink } from '@angular/router';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DetailPenjualanComponent } from './detail-penjualan/detail-penjualan.component';
 
 interface IPenjualan {
   id: number;
@@ -73,6 +79,12 @@ interface IPenjualan {
     RouterLink,
     WidgetsComponent,
     BsDatepickerModule,
+    ButtonCloseDirective,
+    ModalBodyComponent,
+    ModalComponent,
+    ModalHeaderComponent,
+    ModalTitleDirective,
+    DetailPenjualanComponent
   ],
   standalone: true,
   templateUrl: './penjualan-components.component.html',
@@ -90,6 +102,7 @@ public icons = { cilPencil,
   cilCalendar
 };
 selectedDate: string = '';
+public visibleCreatePengeluaran = false;
 
 constructor() { }
 
@@ -130,5 +143,9 @@ ngOnInit(): void {
   getStatusColor(status: 'Lunas' | 'Belum Lunas'): string {
     if (status === 'Lunas') return 'success';
     return 'danger'; // Untuk 'Belum Lunas'
+  }
+
+  onDetailPenjualan(){
+      this.visibleCreatePengeluaran = true
   }
 }
