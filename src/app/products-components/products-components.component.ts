@@ -16,7 +16,12 @@ import {
   ButtonModule,
   PageItemDirective,
   PageLinkDirective,
-  PaginationComponent
+  PaginationComponent,
+  ButtonCloseDirective,
+  ModalBodyComponent,
+  ModalComponent,
+  ModalHeaderComponent,
+  ModalTitleDirective
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
@@ -26,6 +31,7 @@ import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch } from '@coreui/icon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
 import { RouterLink } from '@angular/router';
+import { CreateProductComponentsComponent } from './create-product-components/create-product-components.component';
 
 interface IProduct {
   id: number;
@@ -68,7 +74,14 @@ interface IProduct {
     ,PaginationComponent, 
     PageItemDirective, 
     PageLinkDirective, 
-    RouterLink],
+    RouterLink,
+    ModalComponent,
+    ModalHeaderComponent,
+    ModalTitleDirective,
+    ButtonCloseDirective,
+    ModalBodyComponent,
+    CreateProductComponentsComponent
+  ],
   standalone: true,
   templateUrl: './products-components.component.html',
   styleUrl: './products-components.component.scss',
@@ -77,7 +90,7 @@ interface IProduct {
 export class ProductsComponentsComponent {
   public products: IProduct[] = [];
   public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch };
-
+  public visibleCreateProduct = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -104,4 +117,10 @@ export class ProductsComponentsComponent {
     if (status === 'Habis') return 'danger';
     return 'warning'; // Untuk 'Stok Menipis'
   }
+
+  openCreateProductModal(){
+    this.visibleCreateProduct = true
+  }
+
+
 }

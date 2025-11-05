@@ -1,0 +1,98 @@
+<c-modal [visible]="visible" (visibleChange)="visibleChange.emit($event)" size="lg">
+  <c-modal-header>
+    <h5 cModalTitle>Tambah Produk</h5>
+    <button type="button" cButtonClose (click)="close()"></button>
+  </c-modal-header>
+
+  <c-modal-body>
+    <form [formGroup]="form" class="row g-3">
+
+      <!-- Tanggal Input -->
+      <div class="col-12">
+        <label for="tanggalInput" class="form-label fw-semibold">Tanggal Input <span class="text-danger">*</span></label>
+        <input
+          type="date"
+          id="tanggalInput"
+          class="form-control"
+          formControlName="tanggalInput"
+          placeholder="00/00/0000"
+        />
+      </div>
+
+      <!-- Nama Produk -->
+      <div class="col-12">
+        <label class="form-label fw-semibold">Nama Produk <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="Masukkan nama produk" formControlName="namaProduk" />
+      </div>
+
+      <!-- Kode Produk -->
+      <div class="col-12">
+        <label class="form-label fw-semibold">Kode Produk <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="Masukkan kode produk" formControlName="kodeProduk" />
+      </div>
+
+      <!-- Kategori -->
+      <div class="col-12">
+        <label class="form-label fw-semibold">Kategori <span class="text-danger">*</span></label>
+        <select class="form-select" formControlName="kategori">
+          <option value="">Pilih kategori produk</option>
+          <option>Makanan</option>
+          <option>Minuman</option>
+          <option>Camilan</option>
+        </select>
+      </div>
+
+      <!-- Harga Beli dan Harga Jual -->
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Harga Beli <span class="text-danger">*</span></label>
+        <input type="number" class="form-control" placeholder="Rp 00.000.000" formControlName="hargaBeli" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Harga Jual <span class="text-danger">*</span></label>
+        <input type="number" class="form-control" placeholder="Rp 00.000.000" formControlName="hargaJual" />
+      </div>
+
+      <!-- Stok Awal dan Minimum Stok -->
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Stok Awal <span class="text-danger">*</span></label>
+        <input type="number" class="form-control" placeholder="Masukkan jumlah stok" formControlName="stok" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Minimum Stok <span class="text-danger">*</span></label>
+        <input type="number" class="form-control" placeholder="Masukkan jumlah stok" formControlName="minimalStok" />
+      </div>
+
+      <!-- Status -->
+      <div class="col-12">
+        <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
+        <select class="form-select" formControlName="status">
+          <option>Tersedia</option>
+          <option>Habis</option>
+          <option>Stok Menipis</option>
+        </select>
+      </div>
+
+    </form>
+  </c-modal-body>
+
+  <c-modal-footer class="d-flex justify-content-between align-items-center gap-3">
+    <button
+        type="button"
+        class="btn btn-outline-primary flex-fill py-2 fw-semibold btn-cancel"
+        (click)="close()"
+    >
+        Batal
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-secondary flex-fill py-2 fw-semibold"
+        (click)="submit()"
+        [disabled]="form.invalid"
+    >
+        Simpan
+    </button>
+</c-modal-footer>
+</c-modal>

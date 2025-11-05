@@ -1,4 +1,6 @@
 /* CoreUI Styles */
+@use "./custom-variables" as *;
+
 @use "@coreui/coreui/scss/coreui" as * with (
   $enable-deprecation-messages: false
 );
