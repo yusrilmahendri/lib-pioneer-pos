@@ -7,6 +7,7 @@ import { PenjualanComponentsComponent } from './penjualan-components/penjualan-c
 import { PengeluaranComponentsComponent } from './pengeluaran-components/pengeluaran-components.component';
 import { VouchersComponentsComponent } from './vouchers-components/vouchers-components.component';
 import { LoginComponentsComponent } from './authentifications-components/login-components/login-components.component';
+import { RegisterComponentsComponent } from './authentifications-components/register-components/register-components.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponentsComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponentsComponent,
   },
 
   {

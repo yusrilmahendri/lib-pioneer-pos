@@ -1,1 +1,81 @@
-<p>register-components works!</p>
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container breakpoint="md">
+    <c-row class="justify-content-center">
+        <div class="auth-container d-flex align-items-center justify-content-center min-vh-100">
+            <div class="card shadow-sm p-4" style="width: 380px; border-radius: 16px;">
+                <div class="text-center mb-4">
+                <img src="assets/brand/logo.svg" alt="PioneerSolve" width="40">
+                <h5 class="mt-2 fw-bold">Buat Akun Baru</h5>
+                </div>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <!-- NAMA -->
+                <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" formControlName="name"
+                    placeholder="Nama Lengkap" [ngClass]="{'is-invalid': f['name'].touched && f['name'].invalid}">
+                    <div class="invalid-feedback">Nama wajib diisi.</div>
+                </div>
+
+                <!-- WHATSAPP -->
+                <div class="mb-3">
+                    <label class="form-label">Nomor WhatsApp</label>
+                    <input type="text" class="form-control" formControlName="phone"
+                    placeholder="0895xxxxxx" [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].invalid}">
+                    <div class="invalid-feedback" *ngIf="f['phone'].errors?.['required']">Nomor WhatsApp wajib diisi.</div>
+                    <div class="invalid-feedback" *ngIf="f['phone'].errors?.['pattern']">Nomor WhatsApp tidak valid.</div>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email"
+                    placeholder="nama@email.com" [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}">
+                    <div class="invalid-feedback" *ngIf="f['email'].errors?.['required']">Email wajib diisi.</div>
+                    <div class="invalid-feedback" *ngIf="f['email'].errors?.['email']">Format email tidak valid.</div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" formControlName="password"
+                    placeholder="••••••••" [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}">
+                    <div class="invalid-feedback" *ngIf="f['password'].errors?.['required']">Password wajib diisi.</div>
+                    <div class="invalid-feedback" *ngIf="f['password'].errors?.['minlength']">Minimal 6 karakter.</div>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="mb-3">
+                    <label class="form-label">Konfirmasi Password</label>
+                    <input type="password" class="form-control" formControlName="password_confirmation"
+                    placeholder="••••••••" [ngClass]="{'is-invalid': f['password_confirmation'].touched && (f['password_confirmation'].invalid || form.errors?.['mismatch'])}">
+                    <div class="invalid-feedback" *ngIf="form.errors?.['mismatch']">
+                        Password tidak sama.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="f['password_confirmation'].touched && f['password_confirmation'].errors?.['required']">
+                        Konfirmasi password wajib diisi.
+                    </div>
+                </div>
+
+                <!-- AGREE -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="agree" formControlName="agree"
+                    [ngClass]="{'is-invalid': f['agree'].touched && f['agree'].invalid}">
+                    <label class="form-check-label small" for="agree">
+                    Saya setuju dengan <a href="#" class="text-primary text-decoration-none">Syarat & Ketentuan</a>
+                    </label>
+                    <div class="invalid-feedback">Anda harus menyetujui syarat & ketentuan.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Daftar Sekarang</button>
+                </form>
+
+                <div class="text-center mt-3 small">
+                Sudah punya akun?
+                <a [routerLink]="['/login']" class="text-primary text-decoration-none fw-semibold">Masuk di sini</a>
+                </div>
+            </div>
+        </div>
+    </c-row>
+  </c-container>
+</div>

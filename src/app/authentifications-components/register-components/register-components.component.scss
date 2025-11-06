@@ -1,0 +1,131 @@
+/* Global body */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #f8f9fa); // gradasi biru muda ke abu muda
+}
+
+/* Container yang men-center-kan card */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: transparent; // pastikan transparan
+}
+
+/* Card utama */
+.card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  img {
+    display: block;
+    margin: 0 auto 1rem auto;
+    max-width: 120px;
+  }
+
+  h5 {
+    text-align: center;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  form {
+    margin-top: 1rem;
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-control {
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .form-check {
+      .form-check-input {
+        margin-right: 0.5rem;
+      }
+
+      .form-check-label {
+        font-size: 0.85rem;
+      }
+    }
+
+    button {
+      border-radius: 0.5rem;
+      background-color: #0d6efd;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #0b5ed7;
+      }
+    }
+  }
+
+  .text-center {
+    small {
+      color: #6c757d;
+
+      a {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .card {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  img {
+    max-width: 100px;
+  }
+}
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  opacity: 0.9;
+  border-radius: 50%;
+  animation: fall 1s ease-in forwards;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
