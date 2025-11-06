@@ -25,7 +25,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
-      withHashLocation()
+
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
