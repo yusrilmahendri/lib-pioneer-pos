@@ -81,7 +81,7 @@ interface IProduct {
     ModalTitleDirective,
     ButtonCloseDirective,
     ModalBodyComponent,
-    CreateProductComponentsComponent
+    CreateProductComponentsComponent,
   ],
   standalone: true,
   templateUrl: './products-components.component.html',

@@ -12,13 +12,15 @@ import {
   ProgressComponent,
   WidgetStatBComponent,
   WidgetStatCComponent,
-  WidgetStatFComponent
+  WidgetStatFComponent,
+  TemplateIdDirective
 } from '@coreui/angular';
 import { WidgetsBrandComponent } from '../widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets-dropdown/widgets-dropdown.component';
 import { WidgetsEComponent } from '../widgets-e/widgets-e.component';
-import { IconDirective } from '@coreui/icons-angular';
 import { CommonModule } from '@angular/common';
+import { cilMoney, cilCreditCard, cilGraph, cilCart } from '@coreui/icons';
+import { IconDirective } from '@coreui/icons-angular';
 
 @Component({
   selector: 'app-widgets',
@@ -27,7 +29,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './widgets.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [
-    CommonModule, // ✅ jangan lupa ini untuk ngIf & pipes
+    CommonModule,
     RowComponent,
     ColComponent,
     CardComponent,
@@ -41,12 +43,19 @@ import { CommonModule } from '@angular/common';
     WidgetsBrandComponent,
     WidgetsDropdownComponent,
     WidgetsEComponent,
-    IconDirective
+    IconDirective,
+    TemplateIdDirective,
   ]
 })
 export class WidgetsComponent implements AfterContentInit {
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
+  public icons = {
+    cilCart,
+    cilMoney,
+    cilCreditCard,
+    cilGraph
+  };
 
   currentUrl = toSignal(
     this.router.events.pipe(
