@@ -8,6 +8,7 @@ import { PengeluaranComponentsComponent } from './pengeluaran-components/pengelu
 import { VouchersComponentsComponent } from './vouchers-components/vouchers-components.component';
 import { LoginComponentsComponent } from './authentifications-components/login-components/login-components.component';
 import { RegisterComponentsComponent } from './authentifications-components/register-components/register-components.component';
+import { ForgetPasswordComponent } from './authentifications-components/forget-password/forget-password.component';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,6 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-
   {
     path: 'login',
     component: LoginComponentsComponent,
@@ -23,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponentsComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgetPasswordComponent,
   },
 
   {
