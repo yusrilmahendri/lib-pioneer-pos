@@ -41,6 +41,7 @@
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "html2pdf.js": "^0.12.1",
     "lodash-es": "^4.17.21",
     "ngx-bootstrap": "^20.0.2",
     "ngx-scrollbar": "^13.0.3",

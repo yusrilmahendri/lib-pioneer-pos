@@ -13,4 +13,17 @@
     color: white !important;
   }
 }
+#print-section {
+  width: 80mm;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #000;
+}
 
+#print-section table {
+  width: 100%;
+}
+
+#print-section td {
+  padding: 2px 0;
+}

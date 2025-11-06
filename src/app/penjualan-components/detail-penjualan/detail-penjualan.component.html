@@ -108,3 +108,107 @@
     <button class="btn btn-outline-secondary px-4 py-2" (click)="onClose()" style="width: 25%;">Tutup</button>
   </c-modal-footer>
 </c-modal>
+
+<div #printArea *ngIf="showPrint"> 
+  <c-modal-header>
+    <h5 cModalTitle class="fw-semibold w-100">Detail Transaksi</h5>
+  </c-modal-header>
+
+  <!-- Modal Body -->
+  <c-modal-body>
+    <!-- Info Transaksi -->
+    <div class="bg-light rounded-3 p-3 mb-4">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-1 text-muted">No. Transaksi:</p>
+          <p class="fw-semibold">{{ pengeluaran.noPengeluaran }}</p>
+
+          <p class="mb-1 text-muted mt-3">Kasir:</p>
+          <p class="fw-semibold">{{ pengeluaran.kasir }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-1 text-muted">Tanggal/Jam Transaksi:</p>
+          <p class="fw-semibold">{{ pengeluaran.tanggal | date: 'dd/MM/yyyy, HH:mm' }}</p>
+
+          <p class="mb-1 text-muted mt-3">Status:</p>
+          <span class="badge text-bg-primary fw-semibold px-3 py-2 rounded-2" 
+                style="background-color: #e0f2ff !important; color: #007bff !important;">
+            {{ pengeluaran.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail Pemesanan -->
+    <h6 class="fw-semibold mb-2">Detail Pemesanan</h6>
+    <table class="table align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Nama Barang</th>
+          <th>Kode Barang</th>
+          <th>Qty</th>
+          <th>Harga</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pengeluaran.items">
+          <td>{{ item.nama }}</td>
+          <td>{{ item.kode }}</td>
+          <td class="text-center">{{ item.qty }}</td>
+          <td class="text-end">Rp {{ item.harga | number:'1.0-0' }}</td>
+          <td class="text-end">Rp {{ item.subtotal | number:'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Ringkasan -->
+    <hr class="my-2">
+    <div class="d-flex justify-content-end mt-3" style="width: 100%;">
+      <div style="width: 280px;">
+        <div class="d-flex justify-content-between">
+          <p class="mb-1 text-muted">Subtotal:</p>
+          <p class="mb-1 fw-semibold text-end">Rp {{ pengeluaran.subtotal | number:'1.0-0' }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p class="mb-1 text-muted">PPN 11%:</p>
+          <p class="mb-1 fw-semibold text-end">Rp {{ pengeluaran.ppn | number:'1.0-0' }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p class="mb-1 text-muted">Diskon:</p>
+          <p class="mb-1 fw-semibold text-end">-</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-2">
+    <div class="d-flex justify-content-end" style="width: 100%;">
+      <div style="width: 280px;">
+        <div class="d-flex justify-content-between">
+          <h6 class="fw-bold mb-0">Total:</h6>
+          <h6 class="fw-bold text-primary text-end mb-0">Rp {{ pengeluaran.total | number:'1.0-0' }}</h6>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-2">
+    <div class="mt-4">
+      <h6 class="fw-semibold mb-3">Pembayaran</h6>
+      <div class="d-flex justify-content-between">
+        <p class="mb-1">{{ pengeluaran.metode }}</p>
+        <p class="mb-1 fw-semibold text-end">Rp {{ pengeluaran.bayar | number:'1.0-0' }}</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p class="mb-1 text-primary">Kembalian</p>
+        <p class="mb-1 fw-semibold text-primary text-end">Rp {{ pengeluaran.kembalian | number:'1.0-0' }}</p>
+      </div>
+    </div>
+
+    <!-- ✅ Footer -->
+    <hr class="my-4">
+    <div class="text-center mt-3">
+      <p class="fw-semibold mb-1" style="font-size: 14px;">☕ Cafe Pioneers</p>
+      <p class="text-muted mb-0" style="font-size: 12px;">@ by Pioneersolve</p>
+    </div>
+  </c-modal-body>
+</div>

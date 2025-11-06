@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import {
   ModalComponent,
   ModalHeaderComponent,
@@ -8,8 +8,10 @@ import {
   ButtonDirective,
   ButtonCloseDirective
 } from '@coreui/angular';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import html2pdf from 'html2pdf.js';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detail-penjualan',
@@ -20,10 +22,10 @@ import { CommonModule } from '@angular/common';
     ModalHeaderComponent,
     ModalBodyComponent,
     ModalFooterComponent,
-    ModalTitleDirective,
     ButtonDirective,
     ButtonCloseDirective,
-    ModalTitleDirective],
+    ModalTitleDirective
+  ],
   standalone: true,
   templateUrl: './detail-penjualan.component.html',
   styleUrl: './detail-penjualan.component.scss',
@@ -31,8 +33,12 @@ import { CommonModule } from '@angular/common';
 export class DetailPenjualanComponent {
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
+  @ViewChild('printArea') printArea!: ElementRef;
+
 
   pengeluaranForm: FormGroup;
+  showPrint = false;
+  
 
   // Tambahkan property pengeluaran
   pengeluaran = {
@@ -70,7 +76,46 @@ export class DetailPenjualanComponent {
     this.visibleChange.emit(false);
   }
 
-  onPrint() {
-    window.print();
-  }
+    onPrint() {
+      this.showPrint = true;
+      Swal.fire({
+        title: 'Sedang mencetak...',
+        text: 'Harap tunggu sebentar',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      setTimeout(() => {
+        const element = this.printArea.nativeElement;
+
+        const opt: any = {
+          margin: 0.2,
+          filename: `${this.pengeluaran.noPengeluaran}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'cm', format: [10, 23], orientation: 'portrait' }
+        };
+
+        html2pdf().from(element).set(opt).save()
+          .then(() => {
+            this.showPrint = false;
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil!',
+              text: 'Transaksi berhasil dicetak.',
+              timer: 1500,
+              showConfirmButton: false
+            });
+          })
+          .catch(() => {
+            this.showPrint = false;
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal!',
+              text: 'Terjadi kesalahan saat mencetak.'
+            });
+          });
+      }, 500);
+    }
+
 }
