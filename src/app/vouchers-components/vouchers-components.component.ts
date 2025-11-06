@@ -16,23 +16,19 @@ import {
   PageItemDirective,
   PageLinkDirective,
   PaginationComponent,
-  ButtonCloseDirective,
-  ModalBodyComponent,
-  ModalComponent,
-  ModalHeaderComponent,
-  ModalTitleDirective
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { WidgetsBrandComponent } from '../views/widgets/widgets-brand/widgets-brand.component';
 import { NgStyle, CommonModule } from '@angular/common';
 import { cilPencil, cilTrash, cilPlus , cilPrint, cilSearch } from '@coreui/icons'; 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
 import { RouterLink } from '@angular/router';
 import { CreateVoucherComponent } from './create-voucher/create-voucher.component';
+import Swal from 'sweetalert2';
 
-interface IProduct {
+interface IVoucher {
   id: number;
   tanggalInput: string;
   kodePromo: string;
@@ -80,9 +76,13 @@ interface IProduct {
   styleUrl: './vouchers-components.component.scss',
 })
 export class VouchersComponentsComponent {
-  public vouchers: IProduct[] = [];
+  public vouchers: IVoucher[] = [];
   public icons = { cilPencil, cilTrash, cilPlus, cilPrint, cilSearch };
   public visibleCreateVoucher = false;
+  selectedVoucher: any = null;
+  deletedMessage = ''; // untuk notifikasi
+  showToast = false; // toggle toast
+  visibleDeleteModal = false;
   
   constructor() { }
 
@@ -129,4 +129,36 @@ export class VouchersComponentsComponent {
   onCreateVoucher(){
     this.visibleCreateVoucher = true;
   }
+
+  openEditVoucherModal(voucher?: any) {
+   this.selectedVoucher = voucher; // mode edit
+   this.visibleCreateVoucher = true;
+  }
+
+    openDeletePengeluarantModal(voucher: IVoucher) {
+      Swal.fire({
+        title: `Hapus voucher dengan kode promo "${voucher.kodePromo}"?`,
+        text: "Data voucher akan dihapus permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // hapus produk dari array
+          this.vouchers = this.vouchers.filter(p => p.id !== voucher.id);
+  
+          // notifikasi berhasil
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: `Voucher dengan kode "${voucher.kodePromo}" berhasil dihapus!`,
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
+    }
 }

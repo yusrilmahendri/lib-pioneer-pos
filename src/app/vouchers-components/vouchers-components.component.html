@@ -29,11 +29,6 @@
             >
               <svg [cIcon]="icons.cilPlus" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Tambah Voucher
             </button>
-            <!-- panggil component yang kamu buat -->
-            <app-create-voucher
-              [visible]="visibleCreateVoucher"
-              (visibleChange)="visibleCreateVoucher = $event">
-            </app-create-voucher>
         </div>
       </div>
 
@@ -92,10 +87,10 @@
               </c-badge>
             </td>
             <td>
-              <button class="icon-button me-2">
+              <button class="icon-button me-2" (click)="openEditVoucherModal(voucher)">
                 <svg [cIcon]="icons.cilPencil" width="16" height="16" class="color-blue"></svg>
               </button>
-              <button class="icon-button">
+              <button class="icon-button" (click)="openDeletePengeluarantModal(voucher)">
                 <svg [cIcon]="icons.cilTrash" width="16" height="16" class="text-danger"></svg>
               </button>
             </td>
@@ -103,6 +98,14 @@
         </tbody>
       </table>
     </div>
+
+         <!-- panggil component yang kamu buat -->
+    <app-create-voucher
+      [visible]="visibleCreateVoucher"
+      [mode]="selectedVoucher ? 'edit' : 'create'"
+      [voucher]="selectedVoucher"
+      (visibleChange)="visibleCreateVoucher = $event">
+     </app-create-voucher>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
       <p class="text-muted small mb-0">

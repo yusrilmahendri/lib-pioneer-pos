@@ -33,6 +33,9 @@ export class CreateVoucherComponent {
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
 
+  @Input() mode: 'create' | 'edit' = 'create';
+  @Input() voucher: any = null; // data voucher jika edit
+
   voucherForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -47,6 +50,12 @@ export class CreateVoucherComponent {
     });
   }
 
+  ngOnChanges() {
+    if (this.mode === 'edit' && this.voucher) {
+      this.voucherForm.patchValue(this.voucher);
+    }
+  }
+
   onClose(): void {
     this.visible = false;
     this.visibleChange.emit(false);
@@ -57,11 +66,10 @@ export class CreateVoucherComponent {
       this.voucherForm.markAllAsTouched();
       return;
     }
-
-    // Form valid, kirim data
-    console.log('Form Data:', this.voucherForm.value);
-    
-    // Setelah sukses menyimpan, tutup modal
     this.onClose();
+  }
+
+    get title() {
+    return this.mode === 'create' ? 'Tambah Voucher' : 'Edit Voucher';
   }
 }

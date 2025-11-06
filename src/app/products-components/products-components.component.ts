@@ -101,7 +101,6 @@ export class ProductsComponentsComponent {
 
   ngOnInit(): void {
     this.doInitTabel();
-
   }
 
     doInitTabel(){
