@@ -1,0 +1,63 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container breakpoint="md">
+    <c-row class="justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+            <div class="text-center mb-3">
+            <img src="assets/brand/logo.svg" alt="PioneerSolve" class="img-fluid mb-2" style="max-width: 35%;">
+            <h5 class="fw-semibold">Masuk ke Akun Anda</h5>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    formControlName="email" 
+                    placeholder="nama@email.com" 
+                    [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}">
+
+                     <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+                        Email wajib diisi.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+                    Format email tidak valid.
+                    </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                <label for="password" class="form-label">Password</label>
+                <a [routerLink]="['forgot-password']" class="text-decoration-none small">Lupa Password?</a>
+                </div>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    formControlName="password" 
+                    placeholder="•••••••"
+                    [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}">
+                    <div class="invalid-feedback" *ngIf="f['password'].touched && f['password'].errors?.['required']">
+                        Password wajib diisi.
+                    </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 color-blue">Masuk</button>
+            </form>
+
+            <div class="text-center mt-3">
+            <small>Belum punya akun?
+                <a  [routerLink]="['/register']" class="text-primary fw-semibold text-decoration-none">Daftar di sini</a>
+            </small>
+            </div>
+
+            <div class="text-center mt-3">
+            <small class="text-muted">© PioneerSolve 2025</small>
+            </div>
+        </div>
+</div>
+    </c-row>
+  </c-container>
+</div>
