@@ -58,7 +58,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   private auth = inject(AuthService);
   public iconSetService = inject(IconSetService);
-  public navItems: INavData[] = getNavItems(this.auth.getCurrentUser()?.role || 'guest');
+  public navItems: INavData[] = []; 
 
 
   constructor() {
@@ -83,4 +83,5 @@ export class DefaultLayoutComponent implements OnInit {
     const role = user?.role || 'guest';
     this.navItems = getNavItems(role);
   }
+
 }

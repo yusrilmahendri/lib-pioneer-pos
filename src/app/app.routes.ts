@@ -33,9 +33,6 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Dashboard'
-    },
     children: [
         { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard' } },
         { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk' } },

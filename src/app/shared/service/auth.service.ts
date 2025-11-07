@@ -68,6 +68,17 @@ export class AuthService {
     return !!this.getCurrentUser();
   }
 
+  init(): Promise<void> {
+    return new Promise((resolve) => {
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) {
+        this.currentUser = JSON.parse(savedUser);
+      }
+      resolve();
+    });
+  }
+
+
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('user');
