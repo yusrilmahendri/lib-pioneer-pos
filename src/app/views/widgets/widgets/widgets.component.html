@@ -1,5 +1,5 @@
 <!-- Dashboard -->
-<c-row *ngIf="activeRouteName() === 'dashboard'" class="g-4">
+<c-row *ngIf="isActiveRoute('dashboard/supervisor')" class="g-4">
   <c-col lg="3" xs="12">
       <div class="card bg-white shadow-sm rounded p-3">
         
@@ -77,7 +77,7 @@
 </c-row>
 
 <!-- Penjualan -->
-<c-row class="g-4" *ngIf="activeRouteName() === 'penjualan'">
+<c-row class="g-4" *ngIf="isActiveRoute('penjualan/supervisor')">
    <c-col lg="4" xs="12">
       <div class="card bg-white shadow-sm rounded p-3">
         
@@ -137,7 +137,7 @@
 </c-row>
 
 <!-- Pengeluaran -->
-<c-row class="g-4" *ngIf="activeRouteName() === 'pengeluaran'">
+<c-row class="g-4" *ngIf="isActiveRoute('pengeluaran/supervisor')">
      <c-col lg="12" xs="12">
       <div class="card bg-white shadow-sm rounded p-3">
         <div class="d-flex align-items-center">

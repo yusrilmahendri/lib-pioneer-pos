@@ -65,11 +65,23 @@ export class WidgetsComponent implements AfterContentInit {
     { initialValue: this.router.url }
   );
 
+  isActiveRoute(prefix: string): boolean {
+    return this.router.url.startsWith(`/${prefix}`);
+  }
+
+
   activeRouteName = computed(() => {
     const url = this.currentUrl().split('?')[0];
     const segments = url.split('/').filter(Boolean);
+
+    // Gabungkan dua segmen terakhir jika ada
+    if (segments.length >= 2) {
+      return `${segments[segments.length - 2]}/${segments[segments.length - 1]}`;
+    }
+
     return segments[segments.length - 1] || '';
   });
+
 
   ngAfterContentInit() {
     this.cdr.detectChanges();

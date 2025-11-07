@@ -1,49 +1,39 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
-
-import { IconDirective } from '@coreui/icons-angular';
+import { getNavItems } from './_nav';
+import { AuthService } from '../../shared/service/auth.service';
 import { IconSetService } from '@coreui/icons-angular';
-import { 
-  cilSpeedometer, 
-  cilHistory, 
-  cilWallet, 
+import {
+  SidebarComponent,
+  SidebarNavComponent,
+  ContainerComponent,
+  SidebarBrandComponent,
+  SidebarHeaderComponent,
+  SidebarFooterComponent,
+  SidebarToggleDirective,
+  SidebarTogglerDirective,
+} from '@coreui/angular';
+import {
+  cilSpeedometer,
+  cilHistory,
+  cilWallet,
   cilLayers,
   cilTags,
-  // Ikon Header (Baru)
   cilMenu,
   cilUser,
   cilSettings,
   cilAccountLogout,
   cilSun,
   cilMoon,
-  cilContrast
+  cilContrast,
 } from '@coreui/icons';
-
-import {
-  ContainerComponent,
-  ShadowOnScrollDirective,
-  SidebarBrandComponent,
-  SidebarComponent,
-  SidebarFooterComponent,
-  SidebarHeaderComponent,
-  SidebarNavComponent,
-  SidebarToggleDirective,
-  SidebarTogglerDirective,
-} from '@coreui/angular';
-
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
-import { navItems } from './_nav';
-
-function isOverflown(element: HTMLElement) {
-  return (
-    element.scrollHeight > element.clientHeight ||
-    element.scrollWidth > element.clientWidth
-  );
-}
+import { ShadowOnScrollDirective } from '@coreui/angular';
+import { INavData } from '@coreui/angular';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss'],
   imports: [
@@ -57,32 +47,40 @@ function isOverflown(element: HTMLElement) {
     ContainerComponent,
     DefaultFooterComponent,
     DefaultHeaderComponent,
-    IconDirective,
     NgScrollbar,
     RouterOutlet,
     RouterLink,
     ShadowOnScrollDirective
-  ]
+  ],
+  standalone: true,
 })
-export class DefaultLayoutComponent {
-  public navItems = [...navItems];
-    public iconSetService = inject(IconSetService);
+export class DefaultLayoutComponent implements OnInit {
+
+  private auth = inject(AuthService);
+  public iconSetService = inject(IconSetService);
+  public navItems: INavData[] = getNavItems(this.auth.getCurrentUser()?.role || 'guest');
+
+
   constructor() {
-    // Daftarkan semua ikon yang Anda gunakan di _nav.ts
     this.iconSetService.icons = {
       cilSpeedometer,
       cilHistory,
       cilWallet,
       cilLayers,
       cilTags,
-      // Header
       cilMenu,
       cilUser,
       cilSettings,
       cilAccountLogout,
       cilSun,
       cilMoon,
-      cilContrast
+      cilContrast,
     };
+  }
+
+  ngOnInit(): void {
+    const user = this.auth.getCurrentUser();
+    const role = user?.role || 'guest';
+    this.navItems = getNavItems(role);
   }
 }

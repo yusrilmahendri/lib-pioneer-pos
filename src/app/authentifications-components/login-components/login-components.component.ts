@@ -7,6 +7,7 @@ import {
   RowComponent
 } from '@coreui/angular';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-login-components',
@@ -23,14 +24,13 @@ import Swal from 'sweetalert2';
   styleUrl: './login-components.component.scss',
 })
 export class LoginComponentsComponent {
-private fb = inject(FormBuilder);
-  // private auth = inject(Auth);
-  private router = inject(Router);
+  private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router); // ✅ tambahkan baris ini!
 
   form!: FormGroup;
 
   ngOnInit(): void {
-    // ✅ Inisialisasi form dilakukan di lifecycle hook
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -43,11 +43,26 @@ private fb = inject(FormBuilder);
 
   onSubmit() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); 
+      this.form.markAllAsTouched();
       return;
     }
 
-    const data = this.form.value;
-    this.router.navigate(['/dashboard']);
+    const { email, password } = this.form.value;
+    const success = this.auth.login(email, password);
+
+    if (success) {
+      const user = this.auth.getCurrentUser();
+
+      if (user?.role === 'owner') this.router.navigate(['/dashboard/owner']);
+      else if (user?.role === 'cashier') this.router.navigate(['/dashboard/cashier']);
+      else if (user?.role === 'supervisor') this.router.navigate(['/dashboard/supervisor']);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login gagal',
+        text: 'Email atau password salah!',
+      });
+    }
   }
+
 }

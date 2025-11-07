@@ -9,6 +9,7 @@ import { VouchersComponentsComponent } from './vouchers-components/vouchers-comp
 import { LoginComponentsComponent } from './authentifications-components/login-components/login-components.component';
 import { RegisterComponentsComponent } from './authentifications-components/register-components/register-components.component';
 import { ForgetPasswordComponent } from './authentifications-components/forget-password/forget-password.component';
+import { RoleGuard } from './shared/guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -36,13 +37,14 @@ export const routes: Routes = [
       title: 'Dashboard'
     },
     children: [
-        { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
-        { path: 'products', component: ProductsComponentsComponent, data: { title: 'Kelola Produk' } },
-        { path: 'penjualan', component: PenjualanComponentsComponent, data: { title: 'Kelola Penjualan' } },
-        { path: 'pengeluaran', component: PengeluaranComponentsComponent, data: { title: 'Kelola Pengeluaran' } },
-        { path: 'vouchers', component: VouchersComponentsComponent, data: { title: 'Kelola Voucher' } }
+        { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard' } },
+        { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk' } },
+        { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan' } },
+        { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran' } },
+        { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher' } }
     ]
   },
+
   // Rute-rute ini ditampilkan DI LUAR layout
   {
     path: '404',
