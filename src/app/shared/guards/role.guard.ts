@@ -18,13 +18,10 @@ export class RoleGuard implements CanActivate {
 
     // ✅ Periksa role yang diizinkan
     const allowedRoles = route.data['roles'] as string[];
-    console.log('User role:', user.role);
-    console.log('Allowed roles for this route:', allowedRoles);
     if (allowedRoles && !allowedRoles.includes(user.role)) {
       this.router.navigate(['']);
       return false;
     }
-
     return true;
   }
 }

@@ -42,7 +42,7 @@ export class AuthService {
         this.router.navigate(['/dashboard/owner']);
         break;
       case 'cashier':
-        this.router.navigate(['/cashier']);
+        this.router.navigate(['/dashboard/cashier']);
         break;
       case 'supervisor':
         this.router.navigate(['/dashboard/supervisor']);

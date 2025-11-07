@@ -16,8 +16,8 @@ export function getNavItems(role: string): INavData[] {
       return [
         {
           name: 'Kasir',
-          url: '/cashier',
-          iconComponent: { name: 'cil-speedometer' }
+          url: '/dashboard/cashier',
+          iconComponent: { name: 'cil-cart' }
         },
       ];
 

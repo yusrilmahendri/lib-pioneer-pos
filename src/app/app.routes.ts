@@ -35,21 +35,22 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     children: [
-        { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard' } },
-        { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk' } },
-        { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan' } },
-        { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran' } },
-        { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher' } }
+      // Supervisor
+      { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard', roles: ['supervisor'] } },
+      { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk', roles: ['supervisor'] } },
+      { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan', roles: ['supervisor'] } },
+      { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran', roles: ['supervisor'] } },
+      { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher', roles: ['supervisor'] } },
+
+      // Cashier
+      { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', roles: ['cashier'] } },
+
+      // Owner (jika nanti dibuat)
+      { path: 'dashboard/owner', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard Owner', roles: ['owner'] } },
     ]
   },
 
-  {
-    path: '',
-    component: DefaultLayoutComponent,
-    children: [
-      { path: 'cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir' } },
-    ]
-  },
+
   // Rute-rute ini ditampilkan DI LUAR layout
   {
     path: '404',

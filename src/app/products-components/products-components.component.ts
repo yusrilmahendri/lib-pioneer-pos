@@ -49,7 +49,9 @@ interface IProduct {
 
 @Component({
   selector: 'app-products-components',
-  imports: [ButtonModule,ReactiveFormsModule,
+  imports: [
+    ButtonModule,
+    ReactiveFormsModule,
     FormsModule,
     FormDirective,
     FormLabelDirective,
