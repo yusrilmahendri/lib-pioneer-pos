@@ -1,53 +1,103 @@
+.pos-container {
+  .nav-underline .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    &.active {
+      font-weight: bold;
+      color: #0d6efd;
+      border-bottom: 2px solid #0d6efd;
+    }
+  }
 
-
-// Styling untuk list produk agar bisa di-scroll
-.product-list-container {
-  // Hitung tinggi yang tersedia: 100vh - (tinggi header + margin + padding)
-  max-height: calc(100vh - 250px);
-  overflow-y: auto;
-  padding-right: 10px; // Memberi ruang untuk scrollbar
-
-  // Menggunakan styling CoreUI/Bootstrap untuk hover effect
   .product-item {
-    cursor: pointer;
-    transition: background-color 0.2s;
+    border-radius: 0.5rem;
     &:hover {
-      background-color: #f1f1f1;
+      background-color: #f8f9fa;
+    }
+
+    .add-btn {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+  }
+
+  .total-payment-box {
+    background-color: #f1f5f9;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  }
+
+  .input-group .form-control {
+    min-width: 70px;
+  }
+
+  /* Badge unit */
+  .product-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Dropdown Input Group */
+  .input-group .dropdown-toggle {
+    min-width: 50px;
+  }
+
+  @media (max-width: 576px) {
+    .product-item {
+      flex-direction: column;
+      align-items: flex-start;
+      .text-end {
+        text-align: left !important;
+        margin-top: 0.5rem;
+      }
+      .add-btn {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .input-group {
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
   }
 }
-
-// Styling untuk tag kategori
-.product-tag {
-    font-size: 0.75rem;
-    padding: 0.2rem 0.4rem;
-    width: fit-content;
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  &:hover {
+    background-color: darken(#0d6efd, 7%);
+    border-color: darken(#0d6efd, 7%);
+  }
+  &:disabled {
+    opacity: 0.6;
+  }
 }
+.product-list-container {
+  max-height: 100%; // Atur tinggi maksimal
+  overflow-y: auto;
+  padding-right: 0rem; // space untuk scrollbar
+  scroll-behavior: smooth;
 
-// Styling untuk Total Pembayaran agar menonjol
-.total-payment-box {
-  background-color: #e9f0ff;
-  border: 1px solid #007bff;
-}
-
-// Menyesuaikan tampilan di perangkat kecil (Mobile/Tablet)
-@media (max-width: 991.98px) {
-  .pos-wrapper {
-    padding: 0.5rem !important; // Kurangi padding keseluruhan
-  }
-  
-  // Ubah tinggi list produk karena ringkasan pembayaran mengambil lebih banyak tempat di bagian atas
-  .product-list-container {
-    max-height: calc(100vh - 400px);
+  .product-item {
+    min-width: 100%;
   }
 
-  // Atur lebar input pencarian menjadi 100% di mobile
-  .search-input-group {
-    width: 100%;
+  /* Optional: styling scrollbar untuk modern look */
+  &::-webkit-scrollbar {
+    width: 6px;
   }
-
-  // Sembunyikan detail keranjang di desktop, hanya muncul di ringkasan pembayaran di desktop
-  .cart-detail-desktop {
-    display: none !important;
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
   }
 }

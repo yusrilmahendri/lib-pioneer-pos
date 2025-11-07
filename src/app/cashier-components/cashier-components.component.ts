@@ -31,7 +31,7 @@ import {
   DropdownItemDirective,
   NavComponent,
   NavItemComponent,
-  NavLinkDirective
+  NavLinkDirective,
 } from '@coreui/angular';
 import { IconDirective, IconSetService } from '@coreui/icons-angular'; // Untuk c-icon
 import { cilCalendar ,cilPencil, cilTrash, cilPlus , cilPrint, cilSearch, cilYen  } from '@coreui/icons';
@@ -88,7 +88,7 @@ interface CartItem extends Product {
       NavComponent,
       NavItemComponent,
       NavLinkDirective,
-      IconDirective // Tambahkan IconDirective untuk menggunakan c-icon
+      IconDirective,
       ],
   standalone: true,
   templateUrl: './cashier-components.component.html',

@@ -1,171 +1,180 @@
-<c-card class="pos-container min-vh-100">
-  <c-card-body>
-
-    <c-card class="mb-4 shadow-sm rounded-3 bg-light border-0">
-      <c-card-body class="d-flex justify-content-between align-items-center py-3 px-4 flex-wrap">
-        <div class="d-flex align-items-center mb-2 mb-sm-0">
-          <!-- <fa-icon [icon]="faBagShopping" size="2x" class="me-3 text-primary"></fa-icon> -->
-          <h5 class="mb-0 fw-bold text-dark">{{ branchName }}</h5>
+<c-card>
+   <div class="pos-container min-vh-100 p-3">
+         <!-- Header -->
+        <div class="card mb-4 shadow-sm rounded-3 bg-light border-0">
+            <div class="card-body d-flex justify-content-between align-items-center flex-wrap py-3 px-4">
+            <div class="d-flex align-items-center mb-2 mb-sm-0">
+                <!-- <i class="fa-solid fa-bag-shopping fa-2x text-primary me-3"></i> -->
+                 <h5 class="mb-0 fw-bold text-dark">{{ branchName }}</h5>
+            </div>
+            <div class="d-flex flex-column flex-sm-row flex-wrap text-end text-sm-start small">
+                <div class="me-3 mb-1 mb-sm-0">
+                <span class="fw-semibold text-muted">Kasir:</span>
+                <span class="fw-bold text-dark">&nbsp;{{ kasirName }}</span>
+                </div>
+                <div>
+                <span class="fw-semibold text-muted">Tanggal Transaksi:</span>
+                <span class="fw-bold text-dark">&nbsp;{{ transactionDate }}</span>
+                </div>
+            </div>
+            </div>
         </div>
-        <div class="d-flex flex-column flex-sm-row flex-wrap text-end text-sm-start small">
-          <div class="me-3 mb-1 mb-sm-0">
-            <span class="fw-semibold text-muted">Kasir:</span>
-            <span class="fw-bold text-dark">&nbsp;{{ kasirName }}</span>
-          </div>
-          <div>
-            <span class="fw-semibold text-muted">Tanggal Transaksi:</span>
-            <span class="fw-bold text-dark">&nbsp;{{ transactionDate }}</span>
-          </div>
+        <div class="row g-4">
+            <!-- Produk Katalog -->
+            <div class="col-lg-5 col-xl-4 col-md-12 order-1">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body p-4">
+
+                <!-- Kategori + Search -->
+                <div class="d-flex flex-wrap align-items-center mb-3">
+                    <ul class="nav nav-underline flex-grow-1 me-3 mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="selectedCategory() === 'Semua'" (click)="selectedCategory.set('Semua')">Semua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="selectedCategory() === 'Makanan'" (click)="selectedCategory.set('Makanan')">Makanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="selectedCategory() === 'Minuman'" (click)="selectedCategory.set('Minuman')">Minuman</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="selectedCategory() === 'Cemilan'" (click)="selectedCategory.set('Cemilan')">Cemilan</a>
+                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="selectedCategory() === 'Produk lainnya'" (click)="selectedCategory.set('Produk lainnya')">Produk lainnya</a>
+                    </li>
+                    </ul>
+
+                    <div class="input-group w-100 w-md-auto">
+                    <input type="text" class="form-control" placeholder="Cari produk..." [(ngModel)]="searchText" (ngModelChange)="searchText.set($event)" />
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                    </div>
+                </div>
+
+                <!-- List Produk -->
+             <!-- Product List Scrollable -->
+                <div class="product-list-container overflow-auto">
+                <div *ngIf="filteredProducts().length === 0" class="text-center text-muted py-5">
+                    <p class="mb-0">Tidak ada produk yang cocok dengan kriteria.</p>
+                </div>
+
+                <div *ngFor="let product of filteredProducts()" class="product-item d-flex justify-content-between align-items-center py-3 border-bottom flex-wrap">
+                    <div class="d-flex flex-column flex-grow-1 me-3">
+                    <h6 class="mb-1 fw-bold">{{ product.name }}</h6>
+                    <small class="text-muted">{{ product.id }}</small>
+                    <span *ngIf="product.unit" class="badge bg-light text-secondary rounded-pill mt-2 product-tag">{{ product.unit }}</span>
+                    </div>
+                    <div class="text-end me-3">
+                    <span class="d-block fw-bold text-success">Rp {{ formatRupiah(product.price) }}</span>
+                    <small class="text-muted">Stok: {{ product.stock }}</small>
+                    </div>
+                    <button class="btn btn-primary add-btn mt-2 mt-sm-0" (click)="addToCart(product)">
+                    <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                </div>
+
+
+                </div>
+            </div>
+            </div>
+
+            <!-- Ringkasan Pembayaran -->
+            <div class="col-lg-7 col-xl-8 col-md-12 order-2">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Ringkasan Pembayaran</h5>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Sub total:</span>
+                            <span class="fw-bold">Rp {{ formatRupiah(subTotal()) }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
+                            <span>Total item:</span>
+                            <span class="fw-bold">{{ totalItems() }}</span>
+                        </div>
+
+                        <!-- Diskon -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Potongan Diskon:</label>
+                            <div class="input-group">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="discountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                %
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="discountDropdown">
+                                <li><a class="dropdown-item" (click)="discountPercentage.set(0)">0%</a></li>
+                                <li><a class="dropdown-item" (click)="discountPercentage.set(5)">5%</a></li>
+                                <li><a class="dropdown-item" (click)="discountPercentage.set(10)">10%</a></li>
+                            </ul>
+                            <input type="number" class="form-control" [ngModel]="discountPercentage()" (ngModelChange)="discountPercentage.set($event)" min="0" max="100" placeholder="0" />
+                            <span class="input-group-text">Rp {{ formatRupiah(discountAmount()) }}</span>
+                            </div>
+                        </div>
+
+                        <!-- PPN -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">PPN ({{ ppnPercentage() }}%):</label>
+                            <div class="input-group">
+                            <span class="input-group-text">%</span>
+                            <input type="number" class="form-control" [ngModel]="ppnPercentage()" (ngModelChange)="ppnPercentage.set($event)" min="0" disabled />
+                            <span class="input-group-text">Rp {{ formatRupiah(ppnAmount()) }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Ringkasan -->
+                        <div class="d-flex justify-content-between mb-3 text-muted small">
+                            <span>Potongan diskon:</span>
+                            <span class="fw-bold">- Rp {{ formatRupiah(discountAmount()) }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 text-muted small">
+                            <span>PPN {{ ppnPercentage() }}%:</span>
+                            <span class="fw-bold">+ Rp {{ formatRupiah(ppnAmount()) }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4 total-payment-box py-2 px-3 rounded">
+                            <h5 class="mb-0 fw-bold">Total Pembayaran:</h5>
+                            <h5 class="mb-0 fw-bold text-primary">Rp {{ formatRupiah(totalPayment()) }}</h5>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+                            <button class="btn btn-outline-danger px-3 py-2" (click)="clearCart()" [disabled]="cartItems().length === 0"><i class="fa-solid fa-trash"></i> Kosongkan</button>
+                            <button class="btn btn-primary flex-grow-1 d-flex justify-content-center align-items-center px-4 py-2" (click)="checkout()" [disabled]="cartItems().length === 0">Bayar</button>
+                        </div>
+
+                        <!-- Detail Keranjang Mobile -->
+                        <div *ngIf="cartItems().length > 0" class="d-lg-none mt-4 border-top pt-3">
+                            <h6 class="fw-bold mb-3">Detail Keranjang</h6>
+                            <div *ngFor="let item of cartItems()" class="d-flex align-items-center mb-2 border-bottom pb-2 flex-wrap">
+                            <div class="flex-grow-1 me-2">
+                                <p class="mb-0 fw-semibold">{{ item.name }}</p>
+                                <small class="text-muted">@ Rp {{ formatRupiah(item.price) }}</small>
+                            </div>
+                            <div class="d-flex align-items-center mt-2 mt-sm-0">
+                                <button class="btn btn-secondary btn-sm py-0 px-2" (click)="updateCartItemQuantity(item.id, item.quantity - 1)">
+                                <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="mx-2 fw-bold">{{ item.quantity }}</span>
+                                <button class="btn btn-secondary btn-sm py-0 px-2" (click)="updateCartItemQuantity(item.id, item.quantity + 1)">
+                                <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                            <span class="ms-3 fw-bold text-end" style="width: 80px;">Rp {{ formatRupiah(item.total) }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Empty Cart -->
+                        <div *ngIf="cartItems().length === 0" class="text-center py-5 mt-4 bg-light rounded">
+                            <i class="fa-solid fa-cart-shopping fa-3x text-muted mb-3"></i>
+                            <p class="text-muted mb-0">Keranjang masih kosong</p>
+                            <p class="small text-muted">Silakan tambahkan barang dari katalog</p>
+                        </div>
+
+                        </div>
+                    </div>
+            </div>
         </div>
-      </c-card-body>
-    </c-card>
-
-    <c-row class="g-4">
-      <c-col [lg]="5" [xl]="4" [md]="12" class="order-1 order-lg-1">
-        <c-card class="h-100 shadow-sm">
-          <c-card-body class="p-4">
-            <div class="d-flex flex-wrap align-items-center mb-3">
-              <!-- <c-tabs variant="underline" role="tablist" class="flex-grow-1 me-3 mb-2 mb-md-0">
-                <c-tab [active]="selectedCategory() === 'Semua'" (click)="selectedCategory.set('Semua')">Semua</c-tab>
-                <c-tab [active]="selectedCategory() === 'Makanan'" (click)="selectedCategory.set('Makanan')">Makanan</c-tab>
-                <c-tab [active]="selectedCategory() === 'Minuman'" (click)="selectedCategory.set('Minuman')">Minuman</c-tab>
-                <c-tab [active]="selectedCategory() === 'Cemilan'" (click)="selectedCategory.set('Cemilan')">Cemilan</c-tab>
-                <c-tab [active]="selectedCategory() === 'Produk lainnya'" (click)="selectedCategory.set('Produk lainnya')">Produk lainnya</c-tab>
-              </c-tabs> -->
-
-              <!-- <c-input-group class="search-input-group w-100 w-md-auto"> -->
-                <!-- <c-form-input placeholder="Cari produk..." [(ngModel)]="searchText" (ngModelChange)="searchText.set($event)" />
-                <c-button color="light" variant="outline"><fa-icon [icon]="faSearch"></fa-icon></c-button>
-              </c-input-group> -->
-            </div>
-
-            <div class="product-list-container">
-              <div *ngIf="filteredProducts().length === 0" class="text-center text-muted py-5">
-                <p class="mb-0">Tidak ada produk yang cocok dengan kriteria.</p>
-              </div>
-
-              <div *ngFor="let product of filteredProducts()" class="product-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                <div class="d-flex flex-column flex-grow-1 me-3">
-                  <h6 class="mb-1 fw-bold">{{ product.name }}</h6>
-                  <small class="text-muted">{{ product.id }}</small>
-                  <span *ngIf="product.unit" class="badge bg-light text-secondary rounded-pill mt-1 product-tag">{{ product.unit }}</span>
-                </div>
-                <div class="text-end me-3">
-                  <span class="d-block fw-bold text-success">Rp {{ formatRupiah(product.price) }}</span>
-                  <small class="text-muted">Stok: {{ product.stock }}</small>
-                </div>
-                <!-- <c-button color="primary" (click)="addToCart(product)" class="add-btn">
-                  <fa-icon [icon]="faPlus"></fa-icon>
-                </c-button> -->
-              </div>
-            </div>
-          </c-card-body>
-        </c-card>
-      </c-col>
-
-      <c-col [lg]="7" [xl]="8" [md]="12" class="order-2 order-lg-2">
-        <c-card class="h-100 shadow-sm">
-          <c-card-body class="p-4">
-            <h5 class="fw-bold mb-3">Ringkasan Pembayaran</h5>
-
-            <div class="d-flex justify-content-between mb-2">
-              <span>Sub total:</span>
-              <span class="fw-bold">Rp {{ formatRupiah(subTotal()) }}</span>
-            </div>
-            <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
-              <span>Total item:</span>
-              <span class="fw-bold">{{ totalItems() }}</span>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Potongan Diskon:</label>
-              <c-input-group>
-                <!-- <c-dropdown variant="input-group">
-                  <c-dropdown-toggle color="light">%</c-dropdown-toggle>
-                  <c-dropdown-menu>
-                    <c-dropdown-item (click)="discountPercentage.set(0)">0%</c-dropdown-item>
-                    <c-dropdown-item (click)="discountPercentage.set(5)">5%</c-dropdown-item>
-                    <c-dropdown-item (click)="discountPercentage.set(10)">10%</c-dropdown-item>
-                  </c-dropdown-menu>
-                </c-dropdown> -->
-                <c-form-input
-                  type="number"
-                  placeholder="0"
-                  [ngModel]="discountPercentage()"
-                  (ngModelChange)="discountPercentage.set($event)"
-                  min="0"
-                  max="100"
-                />
-                <span class="input-group-text">Rp {{ formatRupiah(discountAmount()) }}</span>
-              </c-input-group>
-            </div>
-
-            <div class="mb-4">
-              <label class="form-label fw-semibold">PPN ({{ ppnPercentage() }}%):</label>
-              <c-input-group>
-                 <span class="input-group-text">%</span>
-                <c-form-input
-                  type="number"
-                  placeholder="11"
-                  [ngModel]="ppnPercentage()"
-                  (ngModelChange)="ppnPercentage.set($event)"
-                  min="0"
-                  disabled
-                />
-                 <span class="input-group-text">Rp {{ formatRupiah(ppnAmount()) }}</span>
-              </c-input-group>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3 text-muted small">
-              <span>Potongan diskon:</span>
-              <span class="fw-bold">- Rp {{ formatRupiah(discountAmount()) }}</span>
-            </div>
-            <div class="d-flex justify-content-between mb-3 text-muted small">
-              <span>PPN {{ ppnPercentage() }}%:</span>
-              <span class="fw-bold">+ Rp {{ formatRupiah(ppnAmount()) }}</span>
-            </div>
-
-            <div class="d-flex justify-content-between mb-4 total-payment-box py-2 px-3 rounded">
-              <h5 class="mb-0 fw-bold">Total Pembayaran:</h5>
-              <h5 class="mb-0 fw-bold text-primary">Rp {{ formatRupiah(totalPayment()) }}</h5>
-            </div>
-
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <!-- <c-button color="danger" variant="outline" (click)="clearCart()" [disabled]="cartItems().length === 0">Kosongkan</c-button>
-              <c-button color="primary" (click)="checkout()" [disabled]="cartItems().length === 0">Bayar</c-button> -->
-            </div>
-
-            <div *ngIf="cartItems().length > 0" class="d-lg-none mt-4 border-top pt-3">
-              <h6 class="fw-bold mb-3">Detail Keranjang</h6>
-              <div *ngFor="let item of cartItems()" class="d-flex align-items-center mb-2 border-bottom pb-2">
-                <div class="flex-grow-1 me-2">
-                  <p class="mb-0 fw-semibold">{{ item.name }}</p>
-                  <small class="text-muted">@ Rp {{ formatRupiah(item.price) }}</small>
-                </div>
-                <div class="d-flex align-items-center">
-                  <!-- <c-button color="secondary" size="sm" class="py-0 px-2" (click)="updateCartItemQuantity(item.id, item.quantity - 1)">
-                    <fa-icon [icon]="faMinus"></fa-icon>
-                  </c-button>
-                  <span class="mx-2 fw-bold">{{ item.quantity }}</span>
-                  <c-button color="secondary" size="sm" class="py-0 px-2" (click)="updateCartItemQuantity(item.id, item.quantity + 1)">
-                    <fa-icon [icon]="faPlus"></fa-icon>
-                  </c-button> -->
-                </div>
-                <span class="ms-3 fw-bold text-end" style="width: 80px;">Rp {{ formatRupiah(item.total) }}</span>
-              </div>
-            </div>
-
-            <div *ngIf="cartItems().length === 0" class="text-center py-5 mt-4 bg-light rounded">
-              <i class="fa-solid fa-cart-shopping fa-3x text-muted mb-3"></i>
-              <p class="text-muted mb-0">Keranjang masih kosong</p>
-              <p class="small text-muted">Silakan tambahkan barang dari katalog</p>
-            </div>
-
-          </c-card-body>
-        </c-card>
-      </c-col>
-    </c-row>
-
-
-  </c-card-body>
+    </div>
 </c-card>
