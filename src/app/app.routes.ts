@@ -10,6 +10,7 @@ import { LoginComponentsComponent } from './authentifications-components/login-c
 import { RegisterComponentsComponent } from './authentifications-components/register-components/register-components.component';
 import { ForgetPasswordComponent } from './authentifications-components/forget-password/forget-password.component';
 import { RoleGuard } from './shared/guards/role.guard';
+import { CashierComponentsComponent } from './cashier-components/cashier-components.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,13 @@ export const routes: Routes = [
     ]
   },
 
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
+      { path: 'cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir' } },
+    ]
+  },
   // Rute-rute ini ditampilkan DI LUAR layout
   {
     path: '404',

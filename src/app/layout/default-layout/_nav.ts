@@ -15,8 +15,8 @@ export function getNavItems(role: string): INavData[] {
     case 'cashier':
       return [
         {
-          name: 'Dashboard Kasir',
-          url: '/dashboard/cashier',
+          name: 'Kasir',
+          url: '/cashier',
           iconComponent: { name: 'cil-speedometer' }
         },
       ];
@@ -53,9 +53,8 @@ export function getNavItems(role: string): INavData[] {
     default:
       return [
         {
-          name: 'Dashboard',
-          url: '/dashboard',
-          iconComponent: { name: 'cil-speedometer' }
+          name: 'login',
+          url: '',
         }
       ];
   }

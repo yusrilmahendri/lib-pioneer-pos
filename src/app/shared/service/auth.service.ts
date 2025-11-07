@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private users: User[] = [
-    { id: 1, email: 'owner@mail.com', password: '123456', role: 'owner', name: 'Owner User' },
-    { id: 2, email: 'cashier@mail.com', password: '123456', role: 'cashier', name: 'Cashier User' },
-    { id: 3, email: 'supervisor@mail.com', password: '123456', role: 'supervisor', name: 'Supervisor User' },
+    { id: 1, email: 'o@mail.com', password: '123456', role: 'owner', name: 'Owner User' },
+    { id: 2, email: 'c@mail.com', password: '123456', role: 'cashier', name: 'Cashier User' },
+    { id: 3, email: 's@mail.com', password: '123456', role: 'supervisor', name: 'Supervisor User' },
   ];
 
   private currentUser: User | null = null;
@@ -42,7 +42,7 @@ export class AuthService {
         this.router.navigate(['/dashboard/owner']);
         break;
       case 'cashier':
-        this.router.navigate(['/dashboard/cashier']);
+        this.router.navigate(['/cashier']);
         break;
       case 'supervisor':
         this.router.navigate(['/dashboard/supervisor']);
