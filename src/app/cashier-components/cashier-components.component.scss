@@ -1,0 +1,53 @@
+
+
+// Styling untuk list produk agar bisa di-scroll
+.product-list-container {
+  // Hitung tinggi yang tersedia: 100vh - (tinggi header + margin + padding)
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+  padding-right: 10px; // Memberi ruang untuk scrollbar
+
+  // Menggunakan styling CoreUI/Bootstrap untuk hover effect
+  .product-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+// Styling untuk tag kategori
+.product-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    width: fit-content;
+}
+
+// Styling untuk Total Pembayaran agar menonjol
+.total-payment-box {
+  background-color: #e9f0ff;
+  border: 1px solid #007bff;
+}
+
+// Menyesuaikan tampilan di perangkat kecil (Mobile/Tablet)
+@media (max-width: 991.98px) {
+  .pos-wrapper {
+    padding: 0.5rem !important; // Kurangi padding keseluruhan
+  }
+  
+  // Ubah tinggi list produk karena ringkasan pembayaran mengambil lebih banyak tempat di bagian atas
+  .product-list-container {
+    max-height: calc(100vh - 400px);
+  }
+
+  // Atur lebar input pencarian menjadi 100% di mobile
+  .search-input-group {
+    width: 100%;
+  }
+
+  // Sembunyikan detail keranjang di desktop, hanya muncul di ringkasan pembayaran di desktop
+  .cart-detail-desktop {
+    display: none !important;
+  }
+}
