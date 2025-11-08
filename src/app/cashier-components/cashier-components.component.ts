@@ -225,6 +225,12 @@ export class CashierComponentsComponent implements OnInit {
     });
   }
 
+  computeRemoveItem(itemId: string): void {
+    this.cartItems.update(items => {
+      return items.filter(item => item.id !== itemId);
+    });
+  }
+
   // Mengosongkan keranjang
   clearCart(): void {
     this.cartItems.set([]);

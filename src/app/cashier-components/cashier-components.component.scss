@@ -101,3 +101,36 @@
     background-color: transparent;
   }
 }
+.cart-table-container {
+  max-height: 300px; // scroll jika banyak item
+  overflow-y: auto;
+
+  table {
+    margin-bottom: 0;
+
+    th, td {
+      vertical-align: middle;
+    }
+
+    td button {
+      min-width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Scrollbar modern */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
