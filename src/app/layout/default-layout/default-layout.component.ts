@@ -27,7 +27,7 @@ import {
   cilSun,
   cilMoon,
   cilContrast,
-  cilCart
+  cilCart,
 } from '@coreui/icons';
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { ShadowOnScrollDirective } from '@coreui/angular';

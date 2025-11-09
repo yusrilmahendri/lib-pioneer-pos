@@ -19,8 +19,12 @@ export function getNavItems(role: string): INavData[] {
           url: '/dashboard/cashier',
           iconComponent: { name: 'cil-cart' }
         },
+          {
+          name: 'Riwayat Transaksi',
+          url: 'dashboard/cashier/riwayat-transaksi',
+          iconComponent: { name: 'cil-history' }
+        },
       ];
-
     case 'supervisor':
       return [
         {
