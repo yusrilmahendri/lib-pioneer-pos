@@ -45,7 +45,7 @@ export const routes: Routes = [
 
       // Cashier
       { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', roles: ['cashier'] } },
-      { path: 'dashboard/cashier/riwayat-transaksi', component: RiwayatTransactionsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi', roles: ['cashier'] } },
+      // { path: 'cashier/riwayat-transaksi', component: RiwayatTransactionsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi', roles: ['cashier'] } },
 
       // Owner (jika nanti dibuat)
       { path: 'dashboard/owner', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard Owner', roles: ['owner'] } },

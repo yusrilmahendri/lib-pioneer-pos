@@ -21,7 +21,7 @@ export function getNavItems(role: string): INavData[] {
         },
           {
           name: 'Riwayat Transaksi',
-          url: 'dashboard/cashier/riwayat-transaksi',
+          url: '/cashier/riwayat-transaksi',
           iconComponent: { name: 'cil-history' }
         },
       ];
