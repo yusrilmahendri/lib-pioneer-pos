@@ -111,7 +111,8 @@ export class CashierComponentsComponent implements OnInit {
   // State
   cartItems = signal<CartItem[]>([]);
   discountPercentage = signal<number>(0);
-  ppnPercentage = signal<number>(11); // PPN 11% sesuai gambar
+  ppnPercentage = signal<number>(2); // PPN 11% sesuai gambar
+  notificationMessage = signal<string | null>(null);
 
   selectedCategory = signal<string>('Semua');
   searchText = signal<string>('');
@@ -199,6 +200,8 @@ export class CashierComponentsComponent implements OnInit {
 
       return [...items]; // Kembalikan array baru untuk memicu pembaruan Signal
     });
+    this.showNotification(`${product.name} berhasil ditambahkan ke keranjang!`);
+
   }
 
   // Mengubah kuantitas item di keranjang
@@ -246,6 +249,16 @@ export class CashierComponentsComponent implements OnInit {
       console.warn('Keranjang masih kosong.');
     }
   }
+
+  showNotification(message: string): void {
+  this.notificationMessage.set(message);
+
+  // Hilangkan otomatis setelah 3.5 detik
+  setTimeout(() => {
+    this.notificationMessage.set(null);
+  }, 3500);
+}
+
 
   // Helper untuk format Rupiah
   formatRupiah(number: number): string {
