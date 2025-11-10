@@ -11,7 +11,7 @@ import { RegisterComponentsComponent } from './authentifications-components/regi
 import { ForgetPasswordComponent } from './authentifications-components/forget-password/forget-password.component';
 import { RoleGuard } from './shared/guards/role.guard';
 import { CashierComponentsComponent } from './cashier-components/cashier-components.component';
-import { RiwayatTransactionsComponentsComponent } from './riwayat-transactions-components/riwayat-transactions-components.component';
+import { TransactionComponentsComponent } from './transaction-components/transaction-components.component';
 
 export const routes: Routes = [
   {
@@ -45,7 +45,7 @@ export const routes: Routes = [
 
       // Cashier
       { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', roles: ['cashier'] } },
-      // { path: 'cashier/riwayat-transaksi', component: RiwayatTransactionsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi', roles: ['cashier'] } },
+      { path: 'cashier/riwayat-transaksi', component: TransactionComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi', roles: ['cashier'] } },
 
       // Owner (jika nanti dibuat)
       { path: 'dashboard/owner', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard Owner', roles: ['owner'] } },

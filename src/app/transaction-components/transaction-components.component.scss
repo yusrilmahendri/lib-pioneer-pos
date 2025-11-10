@@ -1,0 +1,117 @@
+.icon-button {      
+  background: none;     
+  border: none;     
+  padding: 0;     
+  cursor: pointer;   
+}
+.align-middle{
+  border: 1px solid #dee2e6;
+}
+::ng-deep .bs-datepicker {
+  background: #f8f9fa !important; /* abu terang */
+  border-radius: 0.75rem !important;
+  border: 1px solid #ffffff !important; /* border putih lembut */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+  padding: 0.5rem;
+  width: 80%;
+  max-width: 320px;
+  margin: auto;
+
+  @media (max-width: 992px) {
+    max-width: 90vw;
+  }
+
+  @media (max-width: 576px) {
+    max-width: 95vw;
+    font-size: 0.85rem;
+  }
+
+  /* Header */
+  .bs-datepicker-head {
+    background: #e9ecef !important; /* abu muda */
+    color: #212529 !important;
+    border: none !important;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    padding: 0.5rem;
+    box-shadow: none !important;
+
+    .previous,
+    .next,
+    .current {
+      color: #212529 !important;
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    .current {
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .current:hover {
+      background-color: rgba(0, 0, 0, 0.05) !important;
+      border-radius: 0.5rem;
+    }
+  }
+
+  /* Body */
+  .bs-datepicker-body {
+    background: #ffffff !important;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: none !important;
+      border-radius: 0.5rem;
+      transition: 0.2s;
+    }
+
+    td span {
+      padding: 6px 10px;
+      border: none !important;
+    }
+
+    td span:hover {
+      background-color: #dee2e6 !important; /* abu hover lembut */
+      color: #000 !important;
+    }
+
+    td.selected span,
+    td.active span {
+      background-color: #6c757d !important; /* abu medium */
+      color: #fff !important;
+    }
+  }
+
+  /* Footer & navigasi */
+  .bs-datepicker-buttons {
+    border-top: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    button {
+      border: none !important;
+      background: #e9ecef !important;
+      color: #212529 !important;
+      border-radius: 0.5rem;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #dee2e6 !important;
+    }
+  }
+}
+.color-blue{
+  color: #007bff;
+}

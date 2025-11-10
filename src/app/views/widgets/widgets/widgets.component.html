@@ -159,19 +159,58 @@
 
 <!-- riwayat transaksi -->
 <c-row class="g-4" *ngIf="isActiveRoute('cashier/riwayat-transaksi')">
-     <c-col lg="12" xs="12">
+        <c-col lg="4" xs="12">
       <div class="card bg-white shadow-sm rounded p-3">
+        
         <div class="d-flex align-items-center">
           <div 
             class="d-flex align-items-center justify-content-center rounded-circle me-3" 
-            style="width: 50px; height: 50px; background-color: rgba(250, 3, 3, 0.1);"
+            style="width: 50px; height: 50px; background-color: rgba(0, 123, 255, 0.1);"
           >
-            <svg [cIcon]="icons.cilCreditCard" width="24" height="24" class="text-danger"></svg>
+            <svg [cIcon]="icons.cilCart" width="24" height="24" class="text-primary"></svg>
           </div>
           <div>
-            <h6 class="fw-semibold">Total Pengeluaran</h6>
-            <p class="mb-0 text-danger small">Rp.</p>
-            <h5 class="fw-bold text-danger mb-0">10.000.000</h5>
+            <h6 class="fw-semibold">Total Transaksi</h6>
+             <h5 class="w-bold text-primary mb-0" >200</h5>
+            <h5 class="fw-bold text-primary mb-0" style="color: transparent !important;">200</h5>
+          </div>
+        </div>
+      </div>
+    </c-col>
+
+    <c-col lg="4" xs="12">
+      <div class="card bg-white shadow-sm rounded p-3">
+        
+        <div class="d-flex align-items-center">
+          <div 
+            class="d-flex align-items-center justify-content-center rounded-circle me-3" 
+            style="width: 50px; height: 50px; background-color: rgba(68, 179, 199, 0.1);"
+          >
+            <svg [cIcon]="icons.cilMoney" width="24" height="24" style="color: #44B3C7;"></svg>
+          </div>
+          <div>
+            <h6 class="fw-semibold">Total Pendapatan</h6>
+            <p class="mb-0 small" style="color: #44B3C7;">Rp.</p>
+            <h5 class="fw-bold mb-0" style="color: #44B3C7;">10.000.000</h5>
+          </div>
+        </div>
+      </div>
+    </c-col>
+
+    <c-col lg="4" xs="12">
+      <div class="card bg-white shadow-sm rounded p-3">
+        
+        <div class="d-flex align-items-center">
+          <div 
+            class="d-flex align-items-center justify-content-center rounded-circle me-3" 
+            style="width: 50px; height: 50px; background-color: rgba(0, 200, 83, 0.1);"
+          >
+            <svg [cIcon]="icons.cilGraph" width="24" height="24" class="text-success"></svg>
+          </div>
+          <div>
+            <h6 class="fw-semibold">Laba Kotor</h6>
+            <p class="mb-0 text-success small">Rp.</p>
+            <h5 class="fw-bold text-success mb-0">10.000.000</h5>
           </div>
         </div>
       </div>
