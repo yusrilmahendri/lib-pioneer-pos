@@ -33,7 +33,7 @@ import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui
 import { RouterLink } from '@angular/router';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { DetailPenjualanComponent } from './detail-penjualan/detail-penjualan.component';
+import { ModalDetailComponentsComponent } from '../shared/modal-detail-components/modal-detail-components.component';
 
 interface IPenjualan {
   id: number;
@@ -84,7 +84,7 @@ interface IPenjualan {
     ModalComponent,
     ModalHeaderComponent,
     ModalTitleDirective,
-    DetailPenjualanComponent
+    ModalDetailComponentsComponent
   ],
   standalone: true,
   templateUrl: './penjualan-components.component.html',

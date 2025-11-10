@@ -14,8 +14,8 @@ import html2pdf from 'html2pdf.js';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-detail-penjualan',
-  imports: [    
+  selector: 'app-modal-detail-components',
+  imports: [
     CommonModule,
     ReactiveFormsModule,
     ModalComponent,
@@ -27,11 +27,11 @@ import Swal from 'sweetalert2';
     ModalTitleDirective
   ],
   standalone: true,
-  templateUrl: './detail-penjualan.component.html',
-  styleUrl: './detail-penjualan.component.scss',
+  templateUrl: './modal-detail-components.component.html',
+  styleUrl: './modal-detail-components.component.scss',
 })
-export class DetailPenjualanComponent {
-  @Input() visible = false;
+export class ModalDetailComponentsComponent {
+ @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
   @ViewChild('printArea') printArea!: ElementRef;
 
@@ -117,5 +117,4 @@ export class DetailPenjualanComponent {
           });
       }, 500);
     }
-
 }

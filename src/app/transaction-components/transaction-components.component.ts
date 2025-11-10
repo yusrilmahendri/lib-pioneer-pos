@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControlDirective, FormDirective, FormLabelDirective } from '@coreui/angular';
 import { WidgetsComponent } from '../views/widgets/widgets/widgets.component';
 import { RouterLink } from '@angular/router';
+import { ModalDetailComponentsComponent } from '../shared/modal-detail-components/modal-detail-components.component';
 
 interface IPenjualan {
   id: number;
@@ -67,6 +68,7 @@ import { cilCalendar, cilPencil, cilPlus, cilPrint, cilSearch, cilTrash, cilYen 
     ProgressComponent,
     WidgetsComponent,
     RouterLink,
+    ModalDetailComponentsComponent
   ],
   standalone: true,
   templateUrl: './transaction-components.component.html',
