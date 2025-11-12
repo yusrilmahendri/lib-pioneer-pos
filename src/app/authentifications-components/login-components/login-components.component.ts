@@ -53,7 +53,7 @@ export class LoginComponentsComponent {
 
         if (user?.account_role === 'owner') this.router.navigate(['/dashboard/owner']);
         else if (user?.account_role === 'cashier') this.router.navigate(['/dashboard/cashier']);
-        else if (user?.account_role === 'admin') this.router.navigate(['/dashboard/supervisor']);
+        else if (user?.account_role === 'admin') this.router.navigate(['/dashboard/admin']);
         else this.router.navigate(['/dashboard']);
       },
       error: (err) => {

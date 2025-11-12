@@ -25,31 +25,31 @@ export function getNavItems(role: string): INavData[] {
           iconComponent: { name: 'cil-history' }
         },
       ];
-    case 'supervisor':
+    case 'admin':
       return [
         {
           name: 'Dashboard',
-          url: '/dashboard/supervisor',
+          url: '/dashboard/admin',
           iconComponent: { name: 'cil-speedometer' } // Ikon ini sudah benar
         },
         {
           name: 'Kelola Produk',
-          url: '/products/supervisor', // URL placeholder diperbarui
+          url: '/products/admin', // URL placeholder diperbarui
           iconComponent: { name: 'cil-layers' } 
         },
         {
           name: 'Riwayat Penjualan',
-          url: '/penjualan/supervisor', // URL placeholder diperbarui
+          url: '/penjualan/admin', // URL placeholder diperbarui
           iconComponent: { name: 'cil-history' } // Menggantikan 'cil-pencil'
         },
         {
           name: 'Pengeluaran',
-          url: '/pengeluaran/supervisor', // URL placeholder diperbarui
+          url: '/pengeluaran/admin', // URL placeholder diperbarui
           iconComponent: { name: 'cil-wallet' } // Menggantikan 'cil-pencil'
         },
         {
           name: 'Kelola Voucher',
-          url: '/vouchers/supervisor', // URL placeholder diperbarui
+          url: '/vouchers/admin', // URL placeholder diperbarui
           iconComponent: { name: 'cil-tags' } // Menggantikan 'cil-pencil'
         },
       ];

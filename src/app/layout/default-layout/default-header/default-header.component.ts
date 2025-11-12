@@ -21,18 +21,39 @@ import {
   NavLinkDirective,
   SidebarToggleDirective
 } from '@coreui/angular';
-
+import { AuthService } from '../../../shared/service/auth.service';
 import { IconDirective } from '@coreui/icons-angular';
 
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective]
+  imports: [
+      ContainerComponent, 
+      HeaderTogglerDirective,
+      SidebarToggleDirective, 
+      IconDirective, 
+      HeaderNavComponent, 
+      NavItemComponent, 
+      NavLinkDirective, 
+      RouterLink, 
+      RouterLinkActive, 
+      NgTemplateOutlet, 
+      BreadcrumbRouterComponent, 
+      DropdownComponent, 
+      DropdownToggleDirective, 
+      AvatarComponent, 
+      DropdownMenuDirective, 
+      DropdownHeaderDirective, 
+      DropdownItemDirective,
+      BadgeComponent, 
+      DropdownDividerDirective
+    ]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
 
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
+  private auth = inject(AuthService);
 
   readonly colorModes = [
     { name: 'light', text: 'Light', icon: 'cilSun' },
@@ -50,5 +71,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
   sidebarId = input('sidebar1');
+
+  onLogout(){
+    this.auth.logout();
+  }
 
 }

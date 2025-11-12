@@ -36,12 +36,12 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     children: [
-      // Supervisor
-      { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard',account_role: ['admin'] } },
-      { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk',account_role: ['admin'] } },
-      { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan',account_role: ['admin'] } },
-      { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran',account_role: ['admin'] } },
-      { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher',account_role: ['admin'] } },
+      // Admin
+      { path: 'dashboard/admin', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard',account_role: ['admin'] } },
+      { path: 'products/admin', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk',account_role: ['admin'] } },
+      { path: 'penjualan/admin', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan',account_role: ['admin'] } },
+      { path: 'pengeluaran/admin', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran',account_role: ['admin'] } },
+      { path: 'vouchers/admin', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher',account_role: ['admin'] } },
 
       // Cashier
       { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', account_role: ['cashier'] } },
