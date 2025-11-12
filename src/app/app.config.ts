@@ -56,8 +56,8 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions()
     ),
     importProvidersFrom(HttpClientModule, SidebarModule, DropdownModule),
+    
     IconSetService,
-    provideAnimationsAsync(),
 
     // ✅ Runtime API config
     API_URL_PROVIDER,

@@ -6,8 +6,8 @@ import { AuthService } from '../service/auth.service';
 export class RoleGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    await this.authService.init();
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    this.authService.init(); // cukup panggil biasa
 
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -15,10 +15,9 @@ export class RoleGuard implements CanActivate {
       return false;
     }
 
-    // ✅ Use account_role from API
     const allowedRoles = route.data['roles'] as string[];
     if (allowedRoles && !allowedRoles.includes(user.account_role)) {
-      this.router.navigate(['/404']); // optional: redirect unauthorized users
+      this.router.navigate(['/404']);
       return false;
     }
 

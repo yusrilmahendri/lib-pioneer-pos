@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -19,13 +19,14 @@ export class AuthService {
     }
   }
 
-  init(): Promise<void> {
-    return new Promise((resolve) => {
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) this.currentUser = JSON.parse(savedUser);
-      resolve();
-    });
+  init(): void {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      this.currentUser = JSON.parse(savedUser);
+    }
   }
+
+
 
   // ✅ Login dengan atribut username_or_email
   login(identifier: string, password: string): Observable<any> {
