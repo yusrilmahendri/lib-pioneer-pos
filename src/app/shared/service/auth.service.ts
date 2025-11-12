@@ -1,39 +1,60 @@
 import { Injectable } from '@angular/core';
-import { User } from '../model/user.model';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { User } from '../model/user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private users: User[] = [
-    { id: 1, email: 'o@mail.com', password: '123456', role: 'owner', name: 'Owner User' },
-    { id: 2, email: 'c@mail.com', password: '123456', role: 'cashier', name: 'Cashier User' },
-    { id: 3, email: 's@mail.com', password: '123456', role: 'supervisor', name: 'Supervisor User' },
-  ];
-
   private currentUser: User | null = null;
+  private apiUrl = environment.apiUrl;
 
-  constructor(private router: Router) {
-    // ✅ Saat pertama kali app diload (setelah refresh)
-    // Ambil user dari localStorage agar tetap login
+  constructor(private http: HttpClient, private router: Router) {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       this.currentUser = JSON.parse(savedUser);
     }
   }
 
-  login(email: string, password: string): boolean {
-    const user = this.users.find(u => u.email === email && u.password === password);
+  init(): Promise<void> {
+    return new Promise((resolve) => {
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) this.currentUser = JSON.parse(savedUser);
+      resolve();
+    });
+  }
 
-    if (user) {
-      this.currentUser = user;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.redirectByRole(user.role);
-      return true;
+  // ✅ Login dengan atribut username_or_email
+  login(identifier: string, password: string): Observable<any> {
+    if (!identifier || !password) {
+      throw new Error('Username/email dan password wajib diisi!');
     }
 
-    return false;
+    const payload = {
+      username_or_email: identifier,
+      password,
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, payload).pipe(
+      tap((response) => {
+        const user = response?.data?.user;
+        const token = response?.data?.token;
+
+        if (user && token) {
+          this.currentUser = user;
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('token', token);
+
+          // ✅ gunakan account_role dari response API
+          this.redirectByRole(user.account_role);
+        } else {
+          console.error('Struktur response API tidak sesuai:', response);
+        }
+      })
+    );
   }
 
   private redirectByRole(role: string): void {
@@ -44,7 +65,7 @@ export class AuthService {
       case 'cashier':
         this.router.navigate(['/dashboard/cashier']);
         break;
-      case 'supervisor':
+      case 'admin':
         this.router.navigate(['/dashboard/supervisor']);
         break;
       default:
@@ -54,12 +75,9 @@ export class AuthService {
   }
 
   getCurrentUser(): User | null {
-    // ✅ Jika currentUser belum ada (misal setelah refresh), ambil dari localStorage
     if (!this.currentUser) {
       const savedUser = localStorage.getItem('user');
-      if (savedUser) {
-        this.currentUser = JSON.parse(savedUser);
-      }
+      if (savedUser) this.currentUser = JSON.parse(savedUser);
     }
     return this.currentUser;
   }
@@ -68,20 +86,10 @@ export class AuthService {
     return !!this.getCurrentUser();
   }
 
-  init(): Promise<void> {
-    return new Promise((resolve) => {
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) {
-        this.currentUser = JSON.parse(savedUser);
-      }
-      resolve();
-    });
-  }
-
-
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }

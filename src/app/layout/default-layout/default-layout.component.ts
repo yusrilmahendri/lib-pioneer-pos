@@ -82,7 +82,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.auth.getCurrentUser();
-    const role = user?.role || 'guest';
+    const role = user?.account_role || 'guest';
     this.navItems = getNavItems(role);
   }
 

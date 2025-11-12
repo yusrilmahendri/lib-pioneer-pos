@@ -37,18 +37,18 @@ export const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       // Supervisor
-      { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard', roles: ['supervisor'] } },
-      { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk', roles: ['supervisor'] } },
-      { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan', roles: ['supervisor'] } },
-      { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran', roles: ['supervisor'] } },
-      { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher', roles: ['supervisor'] } },
+      { path: 'dashboard/supervisor', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard',account_role: ['admin'] } },
+      { path: 'products/supervisor', component: ProductsComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Produk',account_role: ['admin'] } },
+      { path: 'penjualan/supervisor', component: PenjualanComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Penjualan',account_role: ['admin'] } },
+      { path: 'pengeluaran/supervisor', component: PengeluaranComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Pengeluaran',account_role: ['admin'] } },
+      { path: 'vouchers/supervisor', component: VouchersComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kelola Voucher',account_role: ['admin'] } },
 
       // Cashier
-      { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', roles: ['cashier'] } },
-      { path: 'cashier/riwayat-transaksi', component: TransactionComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi', roles: ['cashier'] } },
+      { path: 'dashboard/cashier', component: CashierComponentsComponent, canActivate: [RoleGuard], data: { title: 'Kasir', account_role: ['cashier'] } },
+      { path: 'cashier/riwayat-transaksi', component: TransactionComponentsComponent, canActivate: [RoleGuard], data: { title: 'Riwayat Transaksi',account_role: ['cashier'] } },
 
       // Owner (jika nanti dibuat)
-      { path: 'dashboard/owner', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard Owner', roles: ['owner'] } },
+      { path: 'dashboard/owner', component: DashboardComponent, canActivate: [RoleGuard], data: { title: 'Dashboard Owner',account_role: ['owner'] } },
     ]
   },
 

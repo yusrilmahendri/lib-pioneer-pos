@@ -7,7 +7,6 @@ export class RoleGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    // ✅ Pastikan user dari localStorage sudah dimuat
     await this.authService.init();
 
     const user = this.authService.getCurrentUser();
@@ -16,12 +15,13 @@ export class RoleGuard implements CanActivate {
       return false;
     }
 
-    // ✅ Periksa role yang diizinkan
+    // ✅ Use account_role from API
     const allowedRoles = route.data['roles'] as string[];
-    if (allowedRoles && !allowedRoles.includes(user.role)) {
-      this.router.navigate(['']);
+    if (allowedRoles && !allowedRoles.includes(user.account_role)) {
+      this.router.navigate(['/404']); // optional: redirect unauthorized users
       return false;
     }
+
     return true;
   }
 }
