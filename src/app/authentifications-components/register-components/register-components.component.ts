@@ -6,6 +6,8 @@ import {
   ContainerComponent,
   RowComponent
 } from '@coreui/angular';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-components',
@@ -21,11 +23,13 @@ import {
   styleUrl: './register-components.component.scss',
 })
 export class RegisterComponentsComponent {
-private fb = inject(FormBuilder);
-  // private auth = inject(Auth);
+  private fb = inject(FormBuilder);
   private router = inject(Router);
+  private http = inject(HttpClient);
 
   form!: FormGroup;
+  isLoading = false;
+  errorMessage = '';
 
   ngOnInit(): void {
     this.doGetForm();
@@ -45,11 +49,10 @@ private fb = inject(FormBuilder);
   doGetForm(){
     this.form = this.fb.group({
       name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required],
-      agree: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator });  
   }
 
@@ -59,7 +62,30 @@ private fb = inject(FormBuilder);
       this.form.markAllAsTouched(); 
       return;
     }
+    this.isLoading = true;
+    this.errorMessage = '';
 
     const data = this.form.value;
+
+    this.http.post(`${environment.apiUrl}/auth/register`, data).subscribe({
+      next: (res: any) => {
+        console.log('Register success:', res);
+        this.isLoading = false;
+        alert('Registrasi berhasil! Silakan login.');
+        this.router.navigate(['/login']);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.isLoading = false;
+        console.error('Register error:', err);
+
+        if (err.status === 422) {
+          this.errorMessage = 'Validasi gagal. Periksa input Anda.';
+        } else if (err.status === 409) {
+          this.errorMessage = 'Email sudah terdaftar.';
+        } else {
+          this.errorMessage = 'Terjadi kesalahan server.';
+        }
+      }
+    });
   }
 }

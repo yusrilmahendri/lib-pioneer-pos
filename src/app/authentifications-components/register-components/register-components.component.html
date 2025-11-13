@@ -17,15 +17,6 @@
                     <div class="invalid-feedback">Nama wajib diisi.</div>
                 </div>
 
-                <!-- WHATSAPP -->
-                <div class="mb-3">
-                    <label class="form-label">Nomor WhatsApp</label>
-                    <input type="text" class="form-control" formControlName="phone"
-                    placeholder="0895xxxxxx" [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].invalid}">
-                    <div class="invalid-feedback" *ngIf="f['phone'].errors?.['required']">Nomor WhatsApp wajib diisi.</div>
-                    <div class="invalid-feedback" *ngIf="f['phone'].errors?.['pattern']">Nomor WhatsApp tidak valid.</div>
-                </div>
-
                 <!-- EMAIL -->
                 <div class="mb-3">
                     <label class="form-label">Email</label>
@@ -33,6 +24,14 @@
                     placeholder="nama@email.com" [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}">
                     <div class="invalid-feedback" *ngIf="f['email'].errors?.['required']">Email wajib diisi.</div>
                     <div class="invalid-feedback" *ngIf="f['email'].errors?.['email']">Format email tidak valid.</div>
+                </div>
+
+                <!-- USERNAME -->
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" formControlName="username"
+                    placeholder="username" [ngClass]="{'is-invalid': f['username'].touched && f['username'].invalid}">
+                    <div class="invalid-feedback">Username wajib diisi.</div>
                 </div>
 
                 <!-- PASSWORD -->
@@ -55,16 +54,6 @@
                     <div class="invalid-feedback" *ngIf="f['password_confirmation'].touched && f['password_confirmation'].errors?.['required']">
                         Konfirmasi password wajib diisi.
                     </div>
-                </div>
-
-                <!-- AGREE -->
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="agree" formControlName="agree"
-                    [ngClass]="{'is-invalid': f['agree'].touched && f['agree'].invalid}">
-                    <label class="form-check-label small" for="agree">
-                    Saya setuju dengan <a href="#" class="text-primary text-decoration-none">Syarat & Ketentuan</a>
-                    </label>
-                    <div class="invalid-feedback">Anda harus menyetujui syarat & ketentuan.</div>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Daftar Sekarang</button>
