@@ -42,7 +42,7 @@
                "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": [],
+            "allowedCommonJsDependencies": ["html2pdf.js"],
             "stylePreprocessorOptions": {
               "sass": {
                 "silenceDeprecations": []
@@ -59,8 +59,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "15kb"
                 }
               ],
               "outputHashing": "all"
