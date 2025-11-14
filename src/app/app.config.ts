@@ -14,6 +14,7 @@ import { routes } from './app.routes';
 import { AuthService } from './shared/service/auth.service';
 import { environment } from '../environments/environment';
 
+
 // ✅ 1. App initialization (AuthService)
 export function initApp(authService: AuthService) {
   return () => authService.init();
@@ -55,6 +56,7 @@ export const appConfig: ApplicationConfig = {
       withEnabledBlockingInitialNavigation(),
       withViewTransitions()
     ),
+    provideAnimationsAsync(),
     importProvidersFrom(HttpClientModule, SidebarModule, DropdownModule),
     
     IconSetService,

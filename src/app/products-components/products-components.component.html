@@ -1,7 +1,7 @@
 <c-card >
   <c-card-body>
     <!-- Tombol atas -->
-    <div class="d-flex justify-content-end gap-2 mb-3 mt-3">
+    <div class="d-flex justify-content-end gap-2 mb-3 mt-3 responsive-toolbar">
       <button class="btn btn-dark d-flex align-items-center">
          <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
       </button>
@@ -16,23 +16,28 @@
     </div>
 
     <!-- Form filter dan pencarian -->
-    <form>
+    <form class="responsive-searchbar">
       <div class="d-flex justify-content-between align-items-center">
-        <div class="mb-0 mt-3">
+        <div class="mb-3 mt-3">
           <select class="form-select form-select-sm w-auto">
             <option>5</option>
             <option>10</option>
             <option>25</option>
           </select>
         </div>
+
         <div class="position-relative w-25 mb-3 mt-3">
           <input
             type="text"
-            class="form-control form-control ps-5"
+            class="form-control ps-5"
             placeholder="Cari..."
-          
           />
-          <svg [cIcon]="icons.cilSearch" width="16" height="16" class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></svg>  
+          <svg
+            [cIcon]="icons.cilSearch"
+            width="16"
+            height="16"
+            class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary">
+          </svg>
         </div>
       </div>
     </form>

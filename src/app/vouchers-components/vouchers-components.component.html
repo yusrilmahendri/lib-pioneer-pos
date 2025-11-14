@@ -1,8 +1,8 @@
 <c-card>
   <c-card-body>
-    <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <form class="position-relative d-inline-block">
+    <div class="d-flex justify-content-between align-items-center responsive-toolbar">
+        <div class="payment-form">
+          <form>
             <label for="paymentType" class="fw-bold mb-2">Jenis Pembayaran</label><br />
             <select
               id="paymentType"
@@ -17,7 +17,7 @@
           </form>
         </div>
 
-        <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
+        <div class="d-flex justify-content-end gap-3 mb-0 mt-5">
           <button class="btn btn-dark d-flex align-items-center">
             <svg [cIcon]="icons.cilPrint" width="16" height="16"></svg>&nbsp;&nbsp;&nbsp;Cetak
           </button>
@@ -33,9 +33,9 @@
       </div>
 
     <!-- Form filter dan pencarian -->
-    <form>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="mb-0 mt-3">
+    <form class="responsive-searchbar">
+      <div class="d-flex justify-content-between align-items-center responsive-payment-toolbar">
+        <div class="mb-3 mt-3">
           <select class="form-select form-select-sm w-auto">
             <option>5</option>
             <option>10</option>
