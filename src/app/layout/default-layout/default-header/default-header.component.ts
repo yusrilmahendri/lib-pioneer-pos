@@ -73,6 +73,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   sidebarId = input('sidebar1');
 
   onLogout(){
+    console.log('log logout succesfuly')
     this.auth.logout();
   }
 

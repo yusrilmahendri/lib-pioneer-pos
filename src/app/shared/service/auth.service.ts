@@ -87,10 +87,41 @@ export class AuthService {
     return !!this.getCurrentUser();
   }
 
-  logout(): void {
-    this.currentUser = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+logout(): void {
+  const token = localStorage.getItem('token');
+
+  // Jika tidak ada token, langsung bersihkan storage
+  if (!token) {
+    this.cleanStorage();
+    return;
   }
+
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+
+  // Panggil API logout Laravel
+  this.http.post(`${this.apiUrl}/auth/logout`, {}, { headers }).subscribe({
+    next: () => {
+      console.log('Token successfully removed from database');
+      this.cleanStorage();
+    },
+    error: (err) => {
+      console.warn('Logout API error, forcing local logout:', err);
+      // Token expired atau invalid pun tetap hapus localStorage
+      this.cleanStorage();
+    }
+  });
+}
+
+// Fungsi bersih-bersih localStorage
+private cleanStorage(): void {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+
+  console.log('token after remove:', localStorage.getItem('token')); // harus null
+
+  this.router.navigate(['/login']);
+}
+
 }
