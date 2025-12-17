@@ -56,6 +56,14 @@
                     </div>
                 </div>
 
+
+                <div class="mb-3">
+                    <label class="form-label">Nomor Telepon</label>
+                    <input type="text" class="form-control" formControlName="phone"
+                    placeholder="081234567890" [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].invalid}">
+                    <div class="invalid-feedback">Nomor telepon wajib diisi.</div>  
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Daftar Sekarang</button>
                 </form>
 

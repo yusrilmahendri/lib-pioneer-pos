@@ -53,6 +53,7 @@ export class RegisterComponentsComponent {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required],
+      phone: ['', Validators.required],
     }, { validators: this.passwordMatchValidator });  
   }
 
