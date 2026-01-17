@@ -8,14 +8,16 @@ import {
 } from '@coreui/angular';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-register-components',
   imports: [
-    RouterLink, 
-    FormsModule, 
-    CommonModule, 
-    ReactiveFormsModule, 
+    RouterLink,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
     ContainerComponent,
     RowComponent,
   ],
@@ -39,7 +41,7 @@ export class RegisterComponentsComponent {
     return this.form.controls;
   }
 
-  // ✅ Validasi password 
+  // ✅ Validasi password
   passwordMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirm = group.get('password_confirmation')?.value;
@@ -54,31 +56,40 @@ export class RegisterComponentsComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required],
       phone: ['', Validators.required],
-    }, { validators: this.passwordMatchValidator });  
+    }, { validators: this.passwordMatchValidator });
   }
 
   // ✅ Logic submit form register
   onSubmit() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); 
+      this.form.markAllAsTouched();
       return;
     }
     this.isLoading = true;
     this.errorMessage = '';
 
+    this.showLoading('Mendaftarkan akun...');
+
     const data = this.form.value;
 
     this.http.post(`${environment.apiUrl}/auth/register`, data).subscribe({
       next: (res: any) => {
-        console.log('Register success:', res);
         this.isLoading = false;
-        alert('Registrasi berhasil! Silakan login.');
-        this.router.navigate(['/login']);
+        this.closeLoading();
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Akun berhasil didaftarkan. Silakan login.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
       },
+
       error: (err: HttpErrorResponse) => {
         this.isLoading = false;
-        console.error('Register error:', err);
-
+        this.closeLoading();
+        let errorMessage = 'Server error occurred.';
         if (err.status === 422) {
           this.errorMessage = 'Validasi gagal. Periksa input Anda.';
         } else if (err.status === 409) {
@@ -86,7 +97,27 @@ export class RegisterComponentsComponent {
         } else {
           this.errorMessage = 'Terjadi kesalahan server.';
         }
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: this.errorMessage,
+          confirmButtonText: 'OK'
+        });
       }
     });
+  }
+
+  private showLoading(message: string) {
+    Swal.fire({
+      title: message,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      allowOutsideClick: false,
+    });
+  }
+
+  private closeLoading() {
+    Swal.close();
   }
 }
