@@ -7,11 +7,12 @@ import {
   withRouterConfig,
   withViewTransitions
 } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { AuthService } from './shared/service/auth.service';
+import { AuthInterceptor } from './shared/service/auth.interceptor';
 import { environment } from '../environments/environment';
 
 
@@ -58,7 +59,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimationsAsync(),
     importProvidersFrom(HttpClientModule, SidebarModule, DropdownModule),
-    
+
     IconSetService,
 
     // ✅ Runtime API config
@@ -70,6 +71,12 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initApp,
       deps: [AuthService],
+      multi: true
+    },
+    // ✅ HTTP Interceptor untuk Authorization
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     }
   ]

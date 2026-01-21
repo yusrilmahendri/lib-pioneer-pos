@@ -35,10 +35,10 @@
       <div class="col-12">
         <label class="form-label fw-semibold">Kategori <span class="text-danger">*</span></label>
         <select class="form-select" formControlName="kategori">
-          <option value="">Pilih kategori produk</option>
-          <option>Makanan</option>
-          <option>Minuman</option>
-          <option>Camilan</option>
+          <option value="" disabled selected>Pilih kategori produk</option>
+          <option *ngFor="let category of dataCategories" [value]="category.id">
+            {{ category.name_category_business }}
+          </option>
         </select>
       </div>
 

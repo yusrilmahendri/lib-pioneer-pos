@@ -11,7 +11,7 @@ import {
   ButtonCloseDirective,
   ModalModule
 } from '@coreui/angular';
-
+import { DataService, DataServiceType } from '../../shared/service/data.service';
 @Component({
   selector: 'app-create-product-components',
   standalone: true,
@@ -25,22 +25,55 @@ import {
     ModalTitleDirective,
     ButtonDirective,
     ButtonCloseDirective,
-    ModalModule
+    ModalModule,
   ],
   templateUrl: './create-product-components.component.html',
 })
 export class CreateProductComponentsComponent {
-  @Input() visible = false;
+
+  private _visible = false;
+  @Input()
+  set visible(val: boolean) {
+    this._visible = val;
+    if (val) {
+      this.doGetForm();
+      this.doGetCategories();
+    }
+  }
+  get visible() {
+    return this._visible;
+  }
   @Output() visibleChange = new EventEmitter<boolean>();
 
    // properti tambahan untuk mode/titel
   @Input() mode: 'create' | 'edit' = 'create';
   @Input() product: any = null; // data produk jika edit
 
-  form: FormGroup;
+  dataCategories: any[] = [];
+  form: any  =  FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
+  constructor(
+    private fb: FormBuilder,
+    private dataService: DataService
+  ) { }
+
+
+  // ngOnInit tidak perlu fetch data lagi
+  ngOnInit() {}
+
+  doGetCategories() {
+    this.dataService.list(DataServiceType.MASTER_CATEGORY).subscribe({
+      next: (response) => {
+        this.dataCategories = response?.data?.data ?? [];
+      },
+      error: (err) => {
+        console.error('Gagal mengambil data kategori:', err);
+        this.dataCategories = [];
+      }
+    });
+  }
+
+  doGetForm() { this.form = this.fb.group({
       tanggalInput: ['', Validators.required],
       namaProduk: ['', Validators.required],
       kodeProduk: ['', Validators.required],
@@ -52,11 +85,9 @@ export class CreateProductComponentsComponent {
       status: ['Tersedia', Validators.required],
     });
   }
-
   ngOnChanges() {
-    if (this.mode === 'edit' && this.product) {
-      this.form.patchValue(this.product);
-    }
+      this.doGetForm();
+
   }
 
   onClose() {

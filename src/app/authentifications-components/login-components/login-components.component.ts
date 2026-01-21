@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { ContainerComponent, RowComponent } from '@coreui/angular';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../shared/service/auth.service'; // ✅ make sure this path is correct
-import { error } from 'console';
 
 @Component({
   selector: 'app-login-components',
@@ -58,8 +57,10 @@ export class LoginComponentsComponent {
     // ✅ now handle Observable login
     this.auth.login(username_or_email, password).subscribe({
       next: (response) => {
+        // Close loading immediately after login success
         this.isLoading = false;
         this.closeLoading();
+        // Show success dialog after loading is closed
         Swal.fire({
           icon: 'success',
           title: 'Login berhasil',

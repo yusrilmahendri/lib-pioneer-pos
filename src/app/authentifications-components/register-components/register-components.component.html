@@ -24,6 +24,7 @@
                     placeholder="nama@email.com" [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}">
                     <div class="invalid-feedback" *ngIf="f['email'].errors?.['required']">Email wajib diisi.</div>
                     <div class="invalid-feedback" *ngIf="f['email'].errors?.['email']">Format email tidak valid.</div>
+                    <div class="invalid-feedback" *ngIf="errorMessage === 'Email sudah terdaftar.'">Email sudah digunakan.</div>
                 </div>
 
                 <!-- USERNAME -->
@@ -61,7 +62,7 @@
                     <label class="form-label">Nomor Telepon</label>
                     <input type="text" class="form-control" formControlName="phone"
                     placeholder="081234567890" [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].invalid}">
-                    <div class="invalid-feedback">Nomor telepon wajib diisi.</div>  
+                    <div class="invalid-feedback">Nomor telepon wajib diisi.</div>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Daftar Sekarang</button>

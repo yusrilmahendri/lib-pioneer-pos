@@ -60,7 +60,7 @@ export class RegisterComponentsComponent {
   }
 
   // ✅ Logic submit form register
-  onSubmit() {
+ onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -89,9 +89,20 @@ export class RegisterComponentsComponent {
       error: (err: HttpErrorResponse) => {
         this.isLoading = false;
         this.closeLoading();
-        let errorMessage = 'Server error occurred.';
-        if (err.status === 422) {
-          this.errorMessage = 'Validasi gagal. Periksa input Anda.';
+        // Default pesan error
+        let errorMessage = 'Terjadi kesalahan server.';
+
+        // Cek jika ada response error dari backend
+        if (err.status === 422 && err.error && err.error.errors) {
+          // Validasi field
+          const errors = err.error.errors;
+          if (errors.email && errors.email[0] === 'This email is already registered.') {
+            this.errorMessage = 'Email sudah terdaftar.';
+          } else if (errors.username && errors.username[0] === 'This username is already taken.') {
+            this.errorMessage = 'Username sudah digunakan.';
+          } else {
+            this.errorMessage = 'Validasi gagal. Periksa input Anda.';
+          }
         } else if (err.status === 409) {
           this.errorMessage = 'Email sudah terdaftar.';
         } else {
