@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 export enum DataServiceType {
     MASTER_CATEGORY_PRODUCT,
     MASTER_STATUS_PRODUCT,
+    CRUD_PRODUCT,
 }
 
 @Injectable({
@@ -23,6 +24,8 @@ export class DataService {
         return `${this.BASE_URL_API}/product-categories`;
       case DataServiceType.MASTER_STATUS_PRODUCT:
         return `${this.BASE_URL_API}/product-statuses`;
+      case DataServiceType.CRUD_PRODUCT:
+        return `${this.BASE_URL_API}/product`;
       default:
         throw new Error('Invalid DataServiceType');
     }

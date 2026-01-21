@@ -5,7 +5,7 @@
   </c-modal-header>
 
   <c-modal-body>
-    <form [formGroup]="form" class="row g-3">
+    <form [formGroup]="productForm" class="row g-3">
 
       <!-- Tanggal Input -->
       <div class="col-12">
@@ -45,12 +45,20 @@
       <!-- Harga Beli dan Harga Jual -->
       <div class="col-md-6">
         <label class="form-label fw-semibold">Harga Beli <span class="text-danger">*</span></label>
-        <input type="number" class="form-control" placeholder="Rp 00.000.000" formControlName="hargaBeli" />
+        <input type="text" class="form-control" placeholder="Rp 00.000.000"
+          [value]="productForm.get('hargaBeli')?.value ? (productForm.get('hargaBeli')?.value | rupiah) : ''"
+          (input)="onHargaInput($event.target.value, 'hargaBeli')"
+          formControlName="hargaBeli"
+        />
       </div>
 
       <div class="col-md-6">
         <label class="form-label fw-semibold">Harga Jual <span class="text-danger">*</span></label>
-        <input type="number" class="form-control" placeholder="Rp 00.000.000" formControlName="hargaJual" />
+        <input type="text" class="form-control" placeholder="Rp 00.000.000"
+          [value]="productForm.get('hargaJual')?.value ? (productForm.get('hargaJual')?.value | rupiah) : ''"
+          (input)="onHargaInput($event.target.value, 'hargaJual')"
+          formControlName="hargaJual"
+        />
       </div>
 
       <!-- Stok Awal dan Minimum Stok -->
@@ -92,7 +100,7 @@
         type="button"
         class="btn btn-secondary flex-fill py-2 fw-semibold"
         (click)="onSubmit()"
-        [disabled]="form.invalid"
+        [disabled]="productForm.invalid"
     >
         Simpan
     </button>
