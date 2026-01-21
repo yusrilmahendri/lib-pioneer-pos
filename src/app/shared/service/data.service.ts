@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export enum DataServiceType {
-    MASTER_CATEGORY,
+    MASTER_CATEGORY_PRODUCT,
+    MASTER_STATUS_PRODUCT,
 }
 
 @Injectable({
@@ -18,8 +19,10 @@ export class DataService {
 
   public getServiceTypeUrl(type: DataServiceType): string {
     switch (type) {
-      case DataServiceType.MASTER_CATEGORY:
-        return `${this.BASE_URL_API}/business-categories`;
+      case DataServiceType.MASTER_CATEGORY_PRODUCT:
+        return `${this.BASE_URL_API}/product-categories`;
+      case DataServiceType.MASTER_STATUS_PRODUCT:
+        return `${this.BASE_URL_API}/product-statuses`;
       default:
         throw new Error('Invalid DataServiceType');
     }

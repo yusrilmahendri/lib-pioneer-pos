@@ -36,8 +36,9 @@ export class CreateProductComponentsComponent {
   set visible(val: boolean) {
     this._visible = val;
     if (val) {
-      this.doGetForm();
       this.doGetCategories();
+      this.doGetStatuses();
+      this.doGetForm();
     }
   }
   get visible() {
@@ -50,6 +51,8 @@ export class CreateProductComponentsComponent {
   @Input() product: any = null; // data produk jika edit
 
   dataCategories: any[] = [];
+  dataStatuses: any[] = [];
+
   form: any  =  FormGroup;
 
   constructor(
@@ -62,13 +65,23 @@ export class CreateProductComponentsComponent {
   ngOnInit() {}
 
   doGetCategories() {
-    this.dataService.list(DataServiceType.MASTER_CATEGORY).subscribe({
+    this.dataService.list(DataServiceType.MASTER_CATEGORY_PRODUCT).subscribe({
       next: (response) => {
         this.dataCategories = response?.data?.data ?? [];
       },
       error: (err) => {
-        console.error('Gagal mengambil data kategori:', err);
         this.dataCategories = [];
+      }
+    });
+  }
+
+  doGetStatuses() {
+    this.dataService.list(DataServiceType.MASTER_STATUS_PRODUCT).subscribe({
+      next: (response) => {
+        this.dataStatuses = response?.data?.data ?? [];
+      },
+      error: (err) => {
+        console.error('Gagal mengambil data status:', err);
       }
     });
   }
@@ -82,7 +95,7 @@ export class CreateProductComponentsComponent {
       hargaJual: ['', Validators.required],
       stok: ['', Validators.required],
       minimalStok: ['', Validators.required],
-      status: ['Tersedia', Validators.required],
+      status: ['', Validators.required],
     });
   }
   ngOnChanges() {
